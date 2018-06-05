@@ -28,14 +28,13 @@ Commander command = Commander();
 //Buttons(mode independant)
 #define ANALOGMODEBIT ButtonRightTop
 #define ANALOGHOLDBIT ButtonLeftTop
-#define MOVEWALKBIT ButtonRight1
-#define MOVESWERVEBIT ButtonRight2
-#define MOVEOTHERBIT ButtonRight3
+
 
 
 //reminder of variables for gait generation control
 /*
   //All variables range from -127 to 127 under normal situations
+  MoveMode         what gait to use --uint_8t
   GaitPeriod       how long one cycle takes
   GaitMoveX        how far to step each cycle
   GaitMoveY        how far to step each cycle
@@ -51,22 +50,16 @@ Commander command = Commander();
 
 boolean AnalogInMode = 0;
 boolean AnalogHold = 0;
-boolean MoveWalk = 0;
-boolean MoveSwerve = 0;
-boolean MoveOther = 0;
 uint8_t Ext1 = 0;
 uint8_t Ext2 = 0;
 
 //ReadCommanderData
 void GetCommander(){
   //Read Buttons
-  while(command.ReadMsgs() > 0){//Was if
+  while(command.ReadMsgs() > 0){// was an if statement
     uint8_t Buttons = command.buttons;
     AnalogInMode = bitRead(Buttons, ANALOGMODEBIT);
     AnalogHold = bitRead(Buttons, ANALOGHOLDBIT);
-    MoveWalk = bitRead(Buttons, MOVEWALKBIT);
-    MoveSwerve = bitRead(Buttons, MOVESWERVEBIT);
-    MoveOther = bitRead(Buttons, MOVEOTHERBIT);
     //insert other buttons here
     
     
@@ -81,37 +74,37 @@ void GetCommander(){
     int8_t SecondHalfExt = SecondHalfExtTemp;
     
     switch(FirstHalfExt){
-      case 0://Nothing
+      case 0://Reset
+        Ext1 = 0;
+        Ext2 = 0;
+        MoveMode = 0;
+        break;
+      case 1://Nothing
         //Nothing
         break;
-      case 1://Ext1 Follows
+      case 2://Ext1 Follows
         Ext1 = SecondHalfExt;
-        if (Ext1  != 0){
+        if (Ext1  != 0){//Scale Ext1 if not 0
           Ext1 -= 8;
         }
         break;
-      case 2://Ext2 Follows
+      case 3://Ext2 Follows
         Ext2 = SecondHalfExt;
-        if (Ext2  != 0){
+        if (Ext2  != 0){//Scale Ext2 if not 0
           Ext2 -= 8;
         }
+        break;
+      case 4://Leg Position mode
+        //Code here
+        break;
+      case 5://Select Mode
+        MoveMode = SecondHalfExt;
         break;
       default:
         //Things
         break;
     }
    
-    //Set move mode
-    if(MoveWalk == 1){
-      MoveMode = MOVE_MODE_WALK;
-    }
-    else if(MoveSwerve == 1){
-      MoveMode = MOVE_MODE_SWERVE;
-    }
-    else if(MoveOther == 1){
-      MoveMode = MOVE_MODE_OTHER;
-    }
-    
     //apply holds
     if (AnalogHold == 0){
       GaitMoveY = 0;

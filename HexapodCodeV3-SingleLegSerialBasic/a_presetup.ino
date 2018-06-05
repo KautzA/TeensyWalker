@@ -18,11 +18,11 @@
 #define NUM_SERVOS_PER_LEG 5
 
 
-#define MOVE_MODE_WALK 0
+#define MOVE_MODE_WALK_PERIODIC 0
 #define MOVE_MODE_SWERVE 1
-#define MOVE_MODE_OTHER 2
+#define MOVE_MODE_WALK_RULE 2
 
-uint8_t MoveMode = MOVE_MODE_WALK;
+uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 
 //GaitGenControlVars
 int GaitPeriod = 5000; //walk period

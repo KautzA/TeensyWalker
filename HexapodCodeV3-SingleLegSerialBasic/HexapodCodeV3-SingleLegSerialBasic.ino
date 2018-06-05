@@ -1,5 +1,8 @@
 /*
-  Quadraped Gait generator leg test
+ Code by Alchemsit_Arthur for a teensy 3.6 based quad.
+
+
+ Quadraped Gait generator leg test
  uses globals for leg transitions. Also uses floats.
  X Axis is to the Front
  Y Axis is to the right

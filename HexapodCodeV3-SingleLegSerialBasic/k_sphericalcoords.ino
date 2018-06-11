@@ -51,13 +51,14 @@ void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float fem
    {-sin(pitch),0,cos(pitch)}
   };
   
-  UserSerial.print("Angle x ");
-  UserSerial.println(DesVect1[0]);
-  UserSerial.print("Angle y ");
-  UserSerial.println(DesVect1[1]);
-  UserSerial.print("Angle z ");
-  UserSerial.println(DesVect1[2]);
-
+  #if defined(UserSerialTransmit)
+    UserSerial.print("Angle x ");
+    UserSerial.println(DesVect1[0]);
+    UserSerial.print("Angle y ");
+    UserSerial.println(DesVect1[1]);
+    UserSerial.print("Angle z ");
+    UserSerial.println(DesVect1[2]);
+  #endif
   
   
   //Preform the second rotation
@@ -67,21 +68,24 @@ void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float fem
   
   LegDynamixels[leg][3] = atan2(DesVect2[1],DesVect2[0]);//Tibia Rotation in Degrees
   LegDynamixels[leg][4] = -(acos(DesVect2[2]/10));//Tarsus
-  UserSerial.print("FirstShift x ");
-  UserSerial.println(DesVect2[0]);
-  UserSerial.print("FirstShift y ");
-  UserSerial.println(DesVect2[1]);
-  UserSerial.print("FirstShift z ");
-  UserSerial.println(DesVect2[2]);
   
-  UserSerial.print("SecondShift x ");
-  UserSerial.println(DesVect1[0]);
-  UserSerial.print("SecondShift y ");
-  UserSerial.println(DesVect1[1]);
-  UserSerial.print("SecondShift z ");
-  UserSerial.println(DesVect1[2]);
-  
-  UserSerial.println("");
+  #if defined(UserSerialTransmit)
+    UserSerial.print("FirstShift x ");
+    UserSerial.println(DesVect2[0]);
+    UserSerial.print("FirstShift y ");
+    UserSerial.println(DesVect2[1]);
+    UserSerial.print("FirstShift z ");
+    UserSerial.println(DesVect2[2]);
+    
+    UserSerial.print("SecondShift x ");
+    UserSerial.println(DesVect1[0]);
+    UserSerial.print("SecondShift y ");
+    UserSerial.println(DesVect1[1]);
+    UserSerial.print("SecondShift z ");
+    UserSerial.println(DesVect1[2]);
+    
+    UserSerial.println("");
+  #endif
   
   //other stuff
 }

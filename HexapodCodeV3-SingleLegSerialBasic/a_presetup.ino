@@ -1,3 +1,6 @@
+//Enable return data for userSerial
+#define UserSerialTransmit
+
 //Serial Ports
 #define UserSerial Serial
 #define AXSerial Serial1

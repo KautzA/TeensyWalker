@@ -70,8 +70,11 @@ void loop() {
   
   //sphericalCoords goes here
   
-  DXLServoMap();
+  
+  DXLServoMap();//Output motor values
   //PWMServoMap();
+  
+  
   UserSerial.println("");
   UserSerial.print("X = ");
   UserSerial.println(BodyModOut[0][0]);
@@ -87,21 +90,23 @@ void loop() {
   
   
   //Debug Print Statements
-  Serial.print(Tim1);
-  for (int i = 0; i < 4; i++){
-    UserSerial.println("------");
-    UserSerial.print("Coxa = ");
-    UserSerial.println(LegDynamixels[i][0]);
-    UserSerial.print("Femur = ");
-    UserSerial.println(LegDynamixels[i][1]);
-    UserSerial.print("Tibia = ");
-    UserSerial.println(LegDynamixels[i][2]);
-    UserSerial.print("Tibia2 = ");
-    UserSerial.println(LegDynamixels[i][3]);
-    UserSerial.print("Tharsus = ");
-    UserSerial.println(LegDynamixels[i][4]);
-    UserSerial.println("\n");
-  }
+  #if defined(UserSerialTransmit)
+    Serial.print(Tim1);
+    for (int i = 0; i < 4; i++){
+      UserSerial.println("------");
+      UserSerial.print("Coxa = ");
+      UserSerial.println(LegDynamixels[i][0]);
+      UserSerial.print("Femur = ");
+      UserSerial.println(LegDynamixels[i][1]);
+      UserSerial.print("Tibia = ");
+      UserSerial.println(LegDynamixels[i][2]);
+      UserSerial.print("Tibia2 = ");
+      UserSerial.println(LegDynamixels[i][3]);
+      UserSerial.print("Tharsus = ");
+      UserSerial.println(LegDynamixels[i][4]);
+      UserSerial.println("\n");
+    }
+  #endif
   delay(100);
 
 }

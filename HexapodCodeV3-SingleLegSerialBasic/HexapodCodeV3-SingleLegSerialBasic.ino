@@ -17,6 +17,10 @@
  |   3  v  2
  o---------->+Y
  
+ Leg
+ 
+ body -> Coxa -> tibia -> femur -> femurRot -> tharsus
+ 
  Controls
    Takes Commander packet protocol
    8 bytes

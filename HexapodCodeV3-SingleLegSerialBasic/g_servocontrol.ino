@@ -6,21 +6,27 @@ void DXLServoMap(){
       int ServoPos = map(DegreeAngle, -150, 150, 0, 1024);
       if ((ServoPos > DXLServoLimits[i][j][0])&&(ServoPos < DXLServoLimits[i][j][1])){// Servo is within limits
         ServoWrite(DXLServoLimits[i][j][2],ServoPos);
-        UserSerial.print(DXLServoLimits[i][j][2]);
-        UserSerial.print("G");
+        #if defined(UserSerialTransmit)
+          UserSerial.print(DXLServoLimits[i][j][2]);
+          UserSerial.print("G");
+        #endif
       }
       else{//Servo not in limits
         //Do nothing
-        UserSerial.print(DXLServoLimits[i][j][2]);
-        UserSerial.print("B");
-        UserSerial.print(ServoPos);
-        UserSerial.print("--");
+        #if defined(UserSerialTransmit)
+          UserSerial.print(DXLServoLimits[i][j][2]);
+          UserSerial.print("B");
+          UserSerial.print(ServoPos);
+          UserSerial.print("--");
+        #endif
       }
       //UserSerial.print(ServoLimits[i][j][2]);
       //UserSerial.print(" ");
       //UserSerial.println(ServoPos);
     }
-    UserSerial.println();
+    #if defined(UserSerialTransmit)
+      UserSerial.println();
+    #endif
   }
 }
 //-----------------------------------------------------------------

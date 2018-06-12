@@ -27,6 +27,10 @@
 
 uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 
+
+//Variable used to check servo states
+int ServoCheckVal[NUM_LEGS][NUM_SERVOS_PER_LEG] = {0};
+
 //GaitGenControlVars
 int GaitPeriod = 5000; //walk period
 int GaitMoveX = 0;

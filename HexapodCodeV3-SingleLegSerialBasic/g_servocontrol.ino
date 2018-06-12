@@ -31,7 +31,12 @@ void DXLServoMap(){
 }
 //-----------------------------------------------------------------
 
-
+//Querry Servo
+//Querry's position of a servo, if no response or response times out returns -1
+//#define AX_PRESENT_POSITION_L
+int ServoPosQuerry(int ServoID){
+  return (ax12GetRegister(ServoID,AX_PRESENT_POSITION_L,2));
+}
 
 
 //-----------------------------------------------------------------

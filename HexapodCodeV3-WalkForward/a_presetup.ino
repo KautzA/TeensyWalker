@@ -7,6 +7,8 @@
 #define USBSerial Serial
 #define COMMANDSerail Serial
 
+#define GREEN_LED_PIN 12
+#define RED_LED_PIN 24
 
 //Libraries
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial

@@ -1,5 +1,13 @@
 void loop() {
   Tim1 = millis();
+  //Blink a LED
+  if((Tim1%1000)<250){
+    digitalWrite(GREEN_LED_PIN, HIGH);
+  }
+  else{
+    digitalWrite(GREEN_LED_PIN, LOW);
+  }
+  
   //Debug print Statements
   //UserSerial.print("Time =");
   //UserSerial.println(Tim1);

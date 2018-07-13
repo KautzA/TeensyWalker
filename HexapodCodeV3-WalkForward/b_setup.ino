@@ -6,6 +6,10 @@ void setup(){
   //COMMANDSerial.begin(38400);
   delay(2000);
   
+  //Setup Pins
+  pinMode(GREEN_LED_PIN,OUTPUT);
+  pinMode(RED_LED_PIN,OUTPUT);
+  
   #if defined(UserSerialTransmit)
     UserSerial.println("Started");
   #endif

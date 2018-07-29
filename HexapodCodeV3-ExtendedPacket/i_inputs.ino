@@ -21,9 +21,9 @@
 #define BODYLR InputX
 #define BODYFB -InputY 
 #define BODYUD -InputZ
-#define BODYYAW InputRy
-#define BODYPITCH InputRx
-#define BODYROLL InputRz
+#define BODYYAW -InputRz
+#define BODYPITCH -InputRx
+#define BODYROLL InputRy
 //      BODYHEIGHT EXT1 (in = 0) = 0 (in > 0) = 8
 //      BODYROLL   EXT2 (in = 0) = 0 (in > 0) = 8
 //Buttons(mode independant)
@@ -34,7 +34,7 @@
 
 //reminder of variables for gait generation control
 /*
-  //All variables range from -127 to 127 under normal situations
+  //All variables range from -125 to 125 under normal situations
  MoveMode         what gait to use --uint_8t
  GaitPeriod       how long one cycle takes
  GaitMoveX        how far to step each cycle
@@ -115,51 +115,48 @@ int ReadPacket(){//Read a packet from CommandSerial
 
 //ReadCommanderData
 void GetInputs(){
-  
-  ReadPacket();
-  //ReadButtons
-  AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);
-  AnalogHold = bitRead(InputButtons, ANALOGHOLDBIT);
-  //insert other buttons here
+  unsigned long InputTimeout = millis();
+  while((CommandSerial.available()>12)&&(millis()-InputTimeout<100)){
+    ReadPacket();
+    //ReadButtons
+    AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);
+    AnalogHold = bitRead(InputButtons, ANALOGHOLDBIT);
+    //insert other buttons here
 
 
 
 
-  //apply holds
-  if (AnalogHold == 0){
-    GaitMoveY = 0;
-    GaitMoveX = 0;
-    GaitMoveZrot = 0;
-    CamPan = 0;
-    CamTilt = 0;
-    GaitBodyY = 0;
-    GaitBodyX = 0;
-    GaitBodyYaw = 0;
-    GaitBodyPitch = 0;
-    GaitBodyRoll = 0;
-    GaitBodyZ = 0;
+    //apply holds
+    if (AnalogHold == 0){
+      GaitStepHeight = 0;
+      GaitMoveY = 0;
+      GaitMoveX = 0;
+      GaitMoveZrot = 0;
+      CamPan = 0;
+      CamTilt = 0;
+      GaitBodyY = 0;
+      GaitBodyX = 0;
+      GaitBodyYaw = 0;
+      GaitBodyPitch = 0;
+      GaitBodyRoll = 0;
+      GaitBodyZ = 0;
+    }
+    //Check Mode (body or move)
+    if (AnalogInMode == 0){//MoveMode
+      GaitMoveY = MOVELR;
+      GaitMoveX = MOVEFB;
+      GaitMoveZrot = MOVEYAW;
+      GaitStepHeight = MOVEUD;
+      //CamPan = map(Ext1,-7,7,-127,127);
+      //CamTilt = map(Ext2,-7,7,-127,127);
+    }
+    else if (AnalogInMode == 1){//BodyMode
+      GaitBodyY = BODYLR;
+      GaitBodyX = BODYFB;
+      GaitBodyYaw = BODYYAW;
+      GaitBodyPitch = BODYPITCH;
+      GaitBodyZ = BODYUD;
+      GaitBodyRoll = BODYROLL;
+    }
   }
-  //Check Mode (body or move)
-  if (AnalogInMode == 0){//MoveMode
-    GaitMoveY = MOVELR;
-    GaitMoveX = MOVEFB;
-    GaitMoveZrot = MOVEYAW;
-    GaitStepHeight = MOVEUD;
-    //CamPan = map(Ext1,-7,7,-127,127);
-    //CamTilt = map(Ext2,-7,7,-127,127);
-  }
-  else if (AnalogInMode == 1){
-    GaitBodyY = BODYLR;
-    GaitBodyX = BODYFB;
-    GaitBodyYaw = BODYYAW;
-    GaitBodyPitch = BODYPITCH;
-    GaitBodyZ = BODYUD;
-    GaitBodyRoll = BODYROLL;
-  }
-
-
-  //Scale the outputs --- now done in functuions
 }
-
-
-

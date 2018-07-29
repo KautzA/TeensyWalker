@@ -11,7 +11,7 @@ void loop() {
   }
   
   GetInputs();
-  GaitGen(GaitPeriod,Tim1,GaitMoveX,GaitMoveY,10+GaitStepHeight,GaitMoveZrot);
+  GaitGen(GaitPeriod,Tim1,GaitMoveX,GaitMoveY,GaitStepHeight,GaitMoveZrot);
   BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
   LegCoords();
   LegCalculate();

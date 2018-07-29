@@ -128,7 +128,7 @@ void GetInputs(){
 
     //apply holds
     if (AnalogHold == 0){
-      GaitStepHeight = 0;
+      GaitStepHeight = -128;
       GaitMoveY = 0;
       GaitMoveX = 0;
       GaitMoveZrot = 0;

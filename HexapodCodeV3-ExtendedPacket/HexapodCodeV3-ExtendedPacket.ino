@@ -26,12 +26,12 @@
    12 bytes
      1 - 0xFF
      2 - 0xAA
-     3 - X, 3 to 235, centered at 128
-     4 - Y, 3 to 235, centered at 128
-     5 - Z, 3 to 235, centered at 128
-     6 - Rx, 3 to 235, centered at 128
-     7 - Ry, 3 to 235, centered at 128
-     8 - Rz, 3 to 235, centered at 128
+     3 - X, 3 to 253, centered at 128
+     4 - Y, 3 to 253, centered at 128
+     5 - Z, 3 to 253, centered at 128
+     6 - Rx, 3 to 253, centered at 128
+     7 - Ry, 3 to 253, centered at 128
+     8 - Rz, 3 to 253, centered at 128
      9 - Buttons, each button is 1 bit, from lsb to msb; R1,R2,R3,L1,L2,L3,RT,LT
      10- Extended byte1,
      11- Extended byte2,

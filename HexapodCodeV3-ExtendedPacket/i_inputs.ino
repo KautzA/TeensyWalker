@@ -11,18 +11,18 @@
 
 //What input is which----------------------------------------
 //Move Mode(for analog)---------------
-#define MOVELR InputY
-#define MOVEFB InputX
+#define MOVELR InputX
+#define MOVEFB -InputY
 #define MOVEYAW InputRz
-#define MOVEUD InputZ
+#define MOVEUD -InputZ
 //      CamPan  EXT1 (in = 0) = 0 (in > 0) -= 8
 //      CamTilt EXT2 (in = 0) = 0 (in > 0) -= 8
 //Body Mode(for analog)----------------
-#define BODYLR InputY
-#define BODYFB InputX 
-#define BODYUD InputZ
-#define BODYYAW InputRx
-#define BODYPITCH InputRy
+#define BODYLR InputX
+#define BODYFB -InputY 
+#define BODYUD -InputZ
+#define BODYYAW InputRy
+#define BODYPITCH InputRx
 #define BODYROLL InputRz
 //      BODYHEIGHT EXT1 (in = 0) = 0 (in > 0) = 8
 //      BODYROLL   EXT2 (in = 0) = 0 (in > 0) = 8
@@ -105,6 +105,7 @@ int ReadPacket(){//Read a packet from CommandSerial
       InputButtons = (uint8_t)(IncomingBuffer[8]);
       InputExtend1 = (uint8_t)(IncomingBuffer[9]);
       InputExtend2 = (uint8_t)(IncomingBuffer[10]);
+      digitalWrite(LED_RED,HIGH);
       return 1;
     }
   }
@@ -114,11 +115,9 @@ int ReadPacket(){//Read a packet from CommandSerial
 
 //ReadCommanderData
 void GetInputs(){
-  //Read Buttons
-  int PacketState = ReadPacket();
-  if (PacketState = 1){
-    digitalWrite(LED_RED,HIGH);
-  }
+  
+  ReadPacket();
+  //ReadButtons
   AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);
   AnalogHold = bitRead(InputButtons, ANALOGHOLDBIT);
   //insert other buttons here

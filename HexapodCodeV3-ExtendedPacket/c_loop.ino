@@ -47,6 +47,6 @@ void loop() {
       UserSerial.print("\n");
     }
   #endif
-  delay(100);
+  delay(50);
 
 }

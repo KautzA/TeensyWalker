@@ -35,7 +35,7 @@ uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 int ServoCheckVal[NUM_LEGS][NUM_SERVOS_PER_LEG] = {0};
 
 //GaitGenControlVars
-int GaitPeriod = 5000; //walk period
+int GaitPeriod = 2500; //walk period
 int GaitMoveX = 0;
 int GaitMoveY = 0;
 int GaitStepHeight = 0;

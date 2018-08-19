@@ -12,15 +12,15 @@ int GaitGen1Path(int InputArray[][3],int LegNumber, int Cycle, int Period,int Xt
     Modifiers[2] = Ztrans;
   }
   else{//Ground Leg Segment
-    
+    float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*((-Generator0/(NumLegsPeriod-1))+(Period/(2.0*((float)NumLegsPeriod-1)))));//Periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
+    Modifiers[0] = Xtrans*Generator1;
+    Modifiers[1] = Ytrans*Generator1;
+    Modifiers[2] = -Ztrans;
   }
   
-  
-  
-  
-  InputArray[LegNumber][0]=4;//X
-  InputArray[LegNumber][1]=4;//Y
-  InputArray[LegNumber][2]=4;//Z
+  InputArray[LegNumber][0] += Modifiers[0];//X
+  InputArray[LegNumber][1] += Modifiers[1];//Y
+  InputArray[LegNumber][2] += Modifiers[2];//Z
 }
 
 void GaitGen2(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){

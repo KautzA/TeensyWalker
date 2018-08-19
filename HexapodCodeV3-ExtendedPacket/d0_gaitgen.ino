@@ -1,5 +1,5 @@
 //This code covers the basic Gait Generator
-void GaitGen(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){
+void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){
     //Sale the inputs
     Xtrans =map(Xtrans,-127,127,-40,40);
     Ytrans =map(Ytrans,-127,127,-40,40);

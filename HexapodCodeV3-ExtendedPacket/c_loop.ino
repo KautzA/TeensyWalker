@@ -1,6 +1,16 @@
 void loop() {
   Tim1 = millis();
   
+  //Display the time on the display
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0,0);
+  display.println("Code Running");
+  display.print("Time = ");
+  display.print((float)Tim1/1000);
+  display.display();
+  
   //Blink the running LED
   if(Tim1%500<150){
     digitalWrite(LED_YEL,HIGH);

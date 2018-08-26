@@ -11,14 +11,24 @@
 //Libraries
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 #include<BioloidSerial.h> //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
-#include <i2c_t3.h> //Teensy3.x I2C library to use WIRE1
+//#include <i2c_t3.h> //Teensy3.x I2C library to use WIRE1
+
+
+#include <SPI.h>
+#include <Wire.h>//Conflicts with i2c_t3
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+
+
+
 
 
 #define LED_RED 24
 #define LED_YEL 12
 
 
-#define ServoI2C Wire1
+//#define ServoI2C Wire1
 
 #define NUM_LEGS 4
 #define NUM_SERVOS_PER_LEG 5
@@ -55,8 +65,12 @@ int tilt;
 int CamPan = 0;//Unused by GG
 int CamTilt = 0;//Unused by GG
 
+#define OLED_RESET 27
+Adafruit_SSD1306 display(OLED_RESET);
 
-
+#if (SSD1306_LCDHEIGHT != 32)
+#error("Height incorrect, please fix Adafruit_SSD1306.h!");
+#endif
 
 //Defines for BioloidSerial
 #define NumServos 16

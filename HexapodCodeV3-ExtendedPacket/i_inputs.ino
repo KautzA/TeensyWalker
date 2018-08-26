@@ -53,16 +53,6 @@
 uint8_t IncomingBuffer[12];
 uint16_t CommandChecksum;
 
-//Variables used for command Data
-int8_t InputX;
-int8_t InputY;
-int8_t InputZ;
-int8_t InputRx;
-int8_t InputRy;
-int8_t InputRz;
-uint8_t InputButtons;
-uint8_t InputExtend1;
-uint8_t InputExtend2;
 
 
 

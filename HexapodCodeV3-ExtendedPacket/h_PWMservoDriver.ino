@@ -1,6 +1,6 @@
 // provide control for PWM servos via ADAFRUIT pwm servo driver https://www.adafruit.com/product/815
 //Code is based off the library provided and directly uses code
-/*
+
 #define PCA9685_SUBADR1 0x2
 #define PCA9685_SUBADR2 0x3
 #define PCA9685_SUBADR3 0x4
@@ -112,5 +112,5 @@ void PWMI2C_write8(uint8_t addr, uint8_t d) {
   ServoI2C.endTransmission();
 }
 
-*/
+
 

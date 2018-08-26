@@ -11,11 +11,11 @@
 //Libraries
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 #include<BioloidSerial.h> //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
-//#include <i2c_t3.h> //Teensy3.x I2C library to use WIRE1
+#include <i2c_t3.h> //Teensy3.x I2C library to use WIRE1
 
 
 #include <SPI.h>
-#include <Wire.h>//Conflicts with i2c_t3
+//#include <Wire.h>//Conflicts with i2c_t3
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
@@ -28,7 +28,7 @@
 #define LED_YEL 12
 
 
-//#define ServoI2C Wire1
+#define ServoI2C Wire1
 
 #define NUM_LEGS 4
 #define NUM_SERVOS_PER_LEG 5
@@ -43,6 +43,20 @@ uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 
 //Variable used to check servo states
 int ServoCheckVal[NUM_LEGS][NUM_SERVOS_PER_LEG] = {0};
+
+
+//Variables used for command Data in Inputs
+int8_t InputX;
+int8_t InputY;
+int8_t InputZ;
+int8_t InputRx;
+int8_t InputRy;
+int8_t InputRz;
+uint8_t InputButtons;
+uint8_t InputExtend1;
+uint8_t InputExtend2;
+
+
 
 //GaitGenControlVars
 int GaitPeriod = 2500; //walk period
@@ -65,12 +79,18 @@ int tilt;
 int CamPan = 0;//Unused by GG
 int CamTilt = 0;//Unused by GG
 
+
+//OLED definitions
 #define OLED_RESET 27
 Adafruit_SSD1306 display(OLED_RESET);
 
 #if (SSD1306_LCDHEIGHT != 32)
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
+//My OLED definitions
+#define OLED_HEIGHT 32
+#define OLED_WIDTH 128
+#define OLED_I2C Wire
 
 //Defines for BioloidSerial
 #define NumServos 16

@@ -58,8 +58,9 @@
       Gait Select
         Data
           0 - Default Gait (periodic gait)
-          1 - Swerve Mode (Swerve Steering)
-          2 - Rule based gait (Rule based)
+          1 - Crawl Gait (periodic gait)
+          2 - Swerve Mode (Swerve Steering)
+          3 - Rule based gait (Rule based)
           
  
 

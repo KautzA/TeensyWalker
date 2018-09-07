@@ -108,7 +108,7 @@ void GetInputs(){
   unsigned long InputTimeout = millis();
   while((CommandSerial.available()>12)&&(millis()-InputTimeout<100)){
     ReadPacket();
-    //ReadButtons
+    //ReadButtons 
     AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);
     AnalogHold = bitRead(InputButtons, ANALOGHOLDBIT);
     //insert other buttons here
@@ -148,5 +148,60 @@ void GetInputs(){
       GaitBodyZ = BODYUD;
       GaitBodyRoll = BODYROLL;
     }
+
+    switch (InputExtend1 >> 4) {
+    case 0://Reset Exended byte values
+      break;
+    case 1://Do nothing
+      break;
+    case 2://Legacy EXT1
+      break;
+    case 3://Legacy EXT2
+      break;
+    case 4://Leg Place Mode
+      break;
+    case 5://Gait Mode
+      ExtMode5GaitMode(InputExtend1 & 0x0f);
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    case 8:
+      break;
+    case 9:
+      break;
+    case 10:
+      break;
+    case 11:
+      break;
+    case 12:
+      break;
+    case 13:
+      break;
+    }
   }
 }
+
+void ExtMode1Reset(){
+
+}
+
+void ExtMode5GaitMode(uint8_t InputGaitMode){
+  switch (InputGaitMode) {
+  case 0://Default Gait
+    MoveMode = MOVE_MODE_WALK_PERIODIC;
+    break;
+  case 1://Crawl Gait
+    MoveMode = MOVE_MODE_CRAWL_PERIODIC;
+    break;
+  case 2://Leg Place
+    MoveMode = MOVE_MODE_SWERVE;
+    break;
+  case 3://Rule Gait
+    MoveMode = MOVE_MODE_WALK_RULE;
+    break;
+  }
+}
+
+

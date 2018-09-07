@@ -8,6 +8,10 @@
 #define CommandSerial Serial2
 
 
+#if defined(__AVR__)
+#error "Sorry, This code requires Teensy 3.5/3.6"
+#endif
+
 //Libraries
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 #include<BioloidSerial.h> //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
@@ -35,8 +39,9 @@
 
 
 #define MOVE_MODE_WALK_PERIODIC 0
-#define MOVE_MODE_SWERVE 1
-#define MOVE_MODE_WALK_RULE 2
+#define MOVE_MODE_CRAWL_PERIODIC 1
+#define MOVE_MODE_SWERVE 2
+#define MOVE_MODE_WALK_RULE 3
 
 uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 

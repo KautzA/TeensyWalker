@@ -2,30 +2,7 @@ void loop() {
   Tim1 = millis();
   
   //Display the time on the display
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(0,0);
-  display.print("Time = ");
-  display.println((float)Tim1/1000);
-  display.print("X:");
-  display.print(InputX,HEX);
-  display.print(",Y:");
-  display.print(InputY,HEX);
-  display.print(",Z:");
-  display.println(InputZ,HEX);
-  display.print("Rx:");
-  display.print(InputRx,HEX);
-  display.print(",Ry:");
-  display.print(InputRy,HEX);
-  display.print(",Rz:");
-  display.println(InputRz,HEX);
-  display.print("B:");
-  display.print(InputButtons,HEX);
-  display.print(",E1:");
-  display.print(InputExtend1,HEX);
-  display.print(",E2:");
-  display.println(InputExtend2,HEX); 
+  MainDisplay();
   display.display();
   
   //Blink the running LED

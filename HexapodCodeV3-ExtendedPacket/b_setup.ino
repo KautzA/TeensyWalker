@@ -4,8 +4,11 @@ void setup(){
   //Open Serial Ports
   UserSerial.begin(38400);
   CommandSerial.begin(38400);
+  
+#if defined(OLED_ENABLE)
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
   display.display();
+#endif
   delay(2000);
   
   #if defined(UserSerialTransmit)

@@ -3,7 +3,9 @@ void loop() {
   
   //Display the time on the display
   MainDisplay();
+  #if defined(OLED_ENABLE)
   display.display();
+  #endif
   
   //Blink the running LED
   if(Tim1%500<150){

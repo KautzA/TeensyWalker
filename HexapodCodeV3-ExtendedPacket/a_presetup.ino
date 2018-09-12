@@ -1,6 +1,9 @@
 //Enable return data for userSerial
 #define UserSerialTransmit
 
+//Enable OLED use
+#define OLED_ENABLE
+
 //Serial Ports
 #define UserSerial Serial
 #define AXSerial Serial1
@@ -20,9 +23,11 @@
 
 #include <SPI.h>
 //#include <Wire.h>//Conflicts with i2c_t3
+
+#if defined(OLED_ENABLE) //Libraries for OLED
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-
+#endif //End OLED libraries
 
 
 
@@ -86,6 +91,7 @@ int CamTilt = 0;//Unused by GG
 
 
 //OLED definitions
+#if defined(OLED_ENABLE)//Open OLED Definitions
 #define OLED_RESET 27
 Adafruit_SSD1306 display(OLED_RESET);
 
@@ -96,6 +102,8 @@ Adafruit_SSD1306 display(OLED_RESET);
 #define OLED_HEIGHT 32
 #define OLED_WIDTH 128
 #define OLED_I2C Wire
+
+#endif//End OLED Definitions
 
 //Defines for BioloidSerial
 #define NumServos 16

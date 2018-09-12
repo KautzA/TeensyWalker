@@ -5,6 +5,7 @@
 */
 
 void MainDisplay(){//Display run in loop
+#if defined(OLED_ENABLE)
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -29,6 +30,7 @@ void MainDisplay(){//Display run in loop
   display.print(InputExtend1,HEX);
   display.print(",E2:");
   display.println(InputExtend2,HEX); 
+  #endif
 }
 
 /*

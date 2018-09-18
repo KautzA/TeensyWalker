@@ -37,7 +37,7 @@ void loop() {
 
   //sphericalCoords goes here
 
-
+  GimbalControl(CamPan, CamTilt, GimbalMode);
   DXLServoMap();//Output motor values
   //PWMServoMap();
 

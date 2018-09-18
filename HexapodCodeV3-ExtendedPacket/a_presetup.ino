@@ -12,14 +12,16 @@
 
 
 #if defined(__AVR__)
-#error "Sorry, This code requires Teensy 3.5/3.6"
+#error "Sorry, This code requires Teensy 3.x"
 #endif
 
 //Libraries
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 #include<BioloidSerial.h> //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
-#include <i2c_t3.h> //Teensy3.x I2C library to use WIRE1
 
+#include <i2c_t3.h> //Teensy3.x I2C library to use hardware i2c
+
+#include <PulsePosition.h>
 
 #include <SPI.h>
 //#include <Wire.h>//Conflicts with i2c_t3
@@ -87,8 +89,12 @@ float GaitBodyYaw = 0;
 int pan;
 int tilt;
 
+//Gimbal definitions
+PulsePositionOutput GimbalOut;
+#define GIMBAL_PPM_PIN 5
 int CamPan = 0;//Unused by GG
 int CamTilt = 0;//Unused by GG
+int GimbalMode = 0;
 
 
 //OLED definitions

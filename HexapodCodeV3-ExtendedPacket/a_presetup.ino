@@ -48,7 +48,8 @@
 #define MOVE_MODE_SWERVE 2
 #define MOVE_MODE_WALK_RULE 3
 
-uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
+//uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
+uint8_t MoveMode = MOVE_MODE_CRAWL_PERIODIC;
 
 
 //Variable used to check servo states

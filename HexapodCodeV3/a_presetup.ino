@@ -4,6 +4,9 @@
 //Enable OLED use
 #define OLED_ENABLE
 
+//Enable Gimbal use
+#define GIMBAL_ENABLE
+
 //Serial Ports
 #define UserSerial Serial
 #define AXSerial Serial1
@@ -21,7 +24,9 @@
 
 #include <i2c_t3.h> //Teensy3.x I2C library to use hardware i2c
 
+#if defined(GIMBAL_ENABLE)//Gimbal Library
 #include <PulsePosition.h>
+#endif // end gimbal library
 
 #include <SPI.h>
 //#include <Wire.h>//Conflicts with i2c_t3
@@ -55,7 +60,8 @@ uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 
 
 //Variable used to check servo states
-int ServoCheckVal[NUM_LEGS][NUM_SERVOS_PER_LEG] = {0};
+int ServoCheckVal[NUM_LEGS][NUM_SERVOS_PER_LEG] = {
+  0};
 
 
 //Variables used for command Data in Inputs
@@ -119,27 +125,88 @@ BioloidControllerEx bioloid = BioloidControllerEx();
 //Limits and id for each motor in the design in order  min, max, ID
 //ServoLimits
 const int DXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
-  {{538,759,2},{183,813,3},{39,941,4},{205,820,5},{205,820,6}},
-  {{280,469,7},{193,809,8},{56,930,9},{211,814,10},{211,814,11}},
-  {{543,756,12},{186,814,13},{44,926,14},{188,817,15},{188,817,16}},
-  {{262,468,17},{182,824,18},{69,941,19},{208,812,20},{211,814,21}}
-  };
-  
+  {
+    {
+      538,759,2    }
+    ,{
+      183,813,3    }
+    ,{
+      39,941,4    }
+    ,{
+      205,820,5    }
+    ,{
+      205,820,6    }
+  }
+  ,
+  {
+    {
+      280,469,7    }
+    ,{
+      193,809,8    }
+    ,{
+      56,930,9    }
+    ,{
+      211,814,10    }
+    ,{
+      211,814,11    }
+  }
+  ,
+  {
+    {
+      543,756,12    }
+    ,{
+      186,814,13    }
+    ,{
+      44,926,14    }
+    ,{
+      188,817,15    }
+    ,{
+      188,817,16    }
+  }
+  ,
+  {
+    {
+      262,468,17    }
+    ,{
+      182,824,18    }
+    ,{
+      69,941,19    }
+    ,{
+      208,812,20    }
+    ,{
+      211,814,21    }
+  }
+};
+
 #define PWM_SERVOS_MIN 150 //min pulse out of 4096
 #define PWM_SERVOS_MAX 600 //max pulse out of 4096
 
 #define NUM_PWM_SERVOS 6
 const int PWMServoLimits[NUM_PWM_SERVOS][3] = {//order min,max,id
-  {0,180,0},
-  {0,180,1},
-  {0,180,2},
-  {0,180,3},
-  {0,180,4},
-  {0,180,5}};
+  {
+    0,180,0  }
+  ,
+  {
+    0,180,1  }
+  ,
+  {
+    0,180,2  }
+  ,
+  {
+    0,180,3  }
+  ,
+  {
+    0,180,4  }
+  ,
+  {
+    0,180,5  }
+};
 
-float LegDynamixels[NUM_LEGS][NUM_SERVOS_PER_LEG]{0};
+float LegDynamixels[NUM_LEGS][NUM_SERVOS_PER_LEG]{
+  0};
 
-float PWMServoPos[NUM_PWM_SERVOS]={0,0,0,0,0,0};//First 2 are pan/tilt into the gimbal
+float PWMServoPos[NUM_PWM_SERVOS]={
+  0,0,0,0,0,0};//First 2 are pan/tilt into the gimbal
 
 //Initial Positions of legs, used in GaitGen
 //Leg 0 (front left)
@@ -175,3 +242,4 @@ int GaitGenOut[NUM_LEGS][3]; // For GaitGen
 int BodyModOut[NUM_LEGS][3]; // for BodyMod
 int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut
 float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut
+

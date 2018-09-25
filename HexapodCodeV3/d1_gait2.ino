@@ -11,7 +11,7 @@ const uint8_t GaitLegOffset[NUM_LEGS] = {0,2,1,3};
 */
 
 int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cycle,int Xtrans, int Ytrans,int Ztrans, int ZTurn, int NumLegsPeriod = NUM_LEGS){//translation for gait2
-  float Generator0 = (Cycle-((GaitLegOffset[LegNumber]/NumLegsPeriod)*Period))%Period;
+  float Generator0 = (Cycle-((GaitLegOffset[LegNumber]*Period)/NumLegsPeriod))%Period; //generates cyclic values offeset for leg number.
   float Modifiers[4] = {0,0,0,0};
   
   if (Generator0<(Period/NumLegsPeriod)){//lifted leg segment

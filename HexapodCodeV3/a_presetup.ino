@@ -49,13 +49,19 @@
 #define NUM_LEGS 4
 #define NUM_SERVOS_PER_LEG 5
 
-
+//Move Mode --------------------------------------
 #define MOVE_MODE_WALK_PERIODIC 0
 #define MOVE_MODE_CRAWL_PERIODIC 1
 #define MOVE_MODE_SWERVE 2
 #define MOVE_MODE_WALK_RULE 3
 
 uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
+
+//Error States
+uint8_t ErrorState = 0;//Error state is the current error
+#define ERROR_DXL 0 //an error with dynamixel communications, indicated by bit 0 of ErrorState
+#define ERROR_CMD 1 //more than set amount of time passed between command packets, bit 1 of ErrorState
+
 
 
 
@@ -127,54 +133,54 @@ BioloidControllerEx bioloid = BioloidControllerEx();
 const int DXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
   {
     {
-      538,759,2    }
+      538,759,2        }
     ,{
-      183,813,3    }
+      183,813,3        }
     ,{
-      39,941,4    }
+      39,941,4        }
     ,{
-      205,820,5    }
+      205,820,5        }
     ,{
-      205,820,6    }
+      205,820,6        }
   }
   ,
   {
     {
-      280,469,7    }
+      280,469,7        }
     ,{
-      193,809,8    }
+      193,809,8        }
     ,{
-      56,930,9    }
+      56,930,9        }
     ,{
-      211,814,10    }
+      211,814,10        }
     ,{
-      211,814,11    }
+      211,814,11        }
   }
   ,
   {
     {
-      543,756,12    }
+      543,756,12        }
     ,{
-      186,814,13    }
+      186,814,13        }
     ,{
-      44,926,14    }
+      44,926,14        }
     ,{
-      188,817,15    }
+      188,817,15        }
     ,{
-      188,817,16    }
+      188,817,16        }
   }
   ,
   {
     {
-      262,468,17    }
+      262,468,17        }
     ,{
-      182,824,18    }
+      182,824,18        }
     ,{
-      69,941,19    }
+      69,941,19        }
     ,{
-      208,812,20    }
+      208,812,20        }
     ,{
-      211,814,21    }
+      211,814,21        }
   }
 };
 
@@ -184,22 +190,22 @@ const int DXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
 #define NUM_PWM_SERVOS 6
 const int PWMServoLimits[NUM_PWM_SERVOS][3] = {//order min,max,id
   {
-    0,180,0  }
+    0,180,0    }
   ,
   {
-    0,180,1  }
+    0,180,1    }
   ,
   {
-    0,180,2  }
+    0,180,2    }
   ,
   {
-    0,180,3  }
+    0,180,3    }
   ,
   {
-    0,180,4  }
+    0,180,4    }
   ,
   {
-    0,180,5  }
+    0,180,5    }
 };
 
 float LegDynamixels[NUM_LEGS][NUM_SERVOS_PER_LEG]{
@@ -242,4 +248,5 @@ int GaitGenOut[NUM_LEGS][3]; // For GaitGen
 int BodyModOut[NUM_LEGS][3]; // for BodyMod
 int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut
 float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut
+
 

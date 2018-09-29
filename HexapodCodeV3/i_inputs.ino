@@ -49,6 +49,12 @@
  GaitBodyYaw     how far the body should be rotated relative to the legs/direction of travel
  */
 
+//Error state information
+#define CONTROL_PERIOD //How long before indicating communications problem
+unsigned long LastCommand = 0;
+
+
+
 //Variables used to read incoming packets
 uint8_t IncomingBuffer[12];
 uint16_t CommandChecksum;
@@ -62,7 +68,13 @@ uint8_t Ext1 = 0;
 uint8_t Ext2 = 0;
 
 int ReadPacket(){//Read a packet from CommandSerial
-  //Serial.print("\n");
+  if((millis()-LastCommand) > CONTROL_PERIOD){//check for error
+    bitWrite(ErrorState ERROR_CMD 1);
+  }
+  else{
+    bitWrite(ErrorState ERROR_CMD 0);
+  }
+
   while((CommandSerial.available()>0)&&(CommandSerial.peek()!=255)){
     CommandSerial.read();
   }
@@ -95,7 +107,8 @@ int ReadPacket(){//Read a packet from CommandSerial
       InputButtons = (uint8_t)(IncomingBuffer[8]);
       InputExtend1 = (uint8_t)(IncomingBuffer[9]);
       InputExtend2 = (uint8_t)(IncomingBuffer[10]);
-      digitalWrite(LED_RED,HIGH);
+      
+      LastCommand = millis();
       return 1;
     }
   }
@@ -106,7 +119,7 @@ int ReadPacket(){//Read a packet from CommandSerial
 //ReadCommanderData
 void GetInputs(){
   unsigned long InputTimeout = millis();
-  while((CommandSerial.available()>12)&&(millis()-InputTimeout<100)){
+  while((CommandSerial.available()>12)&&((millis()-InputTimeout)<100)){
     ReadPacket();
     //ReadButtons 
     AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);

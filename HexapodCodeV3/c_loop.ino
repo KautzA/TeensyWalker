@@ -7,14 +7,7 @@ void loop() {
   display.display();
 #endif
 
-  //Blink the running LED
-  if(Tim1%500<150){
-    digitalWrite(LED_YEL,HIGH);
-  }
-  else{
-    digitalWrite(LED_YEL,LOW);
-    digitalWrite(LED_RED,LOW);
-  }
+
 
   GetInputs();
   switch (MoveMode){
@@ -60,8 +53,36 @@ void loop() {
     UserSerial.print("\n");
   }
 #endif
+
+  //Blink the running LED
+  if(Tim1%500<150){
+    digitalWrite(LED_YEL,HIGH);
+  }
+  else{
+    digitalWrite(LED_YEL,LOW);
+  }
+  //Handle error LED patterns
+  if(ErrorState & b00000001){//DXL Error
+    if(Tim1%500<150){
+      digitalWrite(LED_RED,HIGH);
+    }
+    else{
+      digitalWrite(LED_RED,LOW);
+    }
+  }
+  if(ErrorState & b00000010){//CMD error
+    if(Tim1%500<250){
+      digitalWrite(LED_RED,HIGH);
+    }
+    else{
+      digitalWrite(LED_RED,LOW);
+    }
+  }
+
   delay(50);
 
 }
+
+
 
 

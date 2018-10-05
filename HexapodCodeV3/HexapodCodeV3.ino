@@ -1,5 +1,5 @@
 /*
- Code by Alchemsit_Arthur for a teensy 3.6 based quad.
+ Code by Alchemsit_Arthur for a teensy 3.6 based quad. Can also be used on a hexapod.
 
 
  Quadraped Gait generator leg test

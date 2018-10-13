@@ -5,7 +5,7 @@
 #define OLED_ENABLE
 
 //Enable Gimbal use
-#define GIMBAL_ENABLE
+//#define GIMBAL_ENABLE
 
 //Serial Ports
 #define UserSerial Serial
@@ -56,6 +56,7 @@
 #define MOVE_MODE_WALK_RULE 3
 
 uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
+//uint8_t MoveMode = MOVE_MODE_CRAWL_PERIODIC;
 
 //Error States
 uint8_t ErrorState = 0;//Error state is the current error
@@ -102,8 +103,10 @@ int pan;
 int tilt;
 
 //Gimbal definitions
+#if defined GIMBAL_ENABLE
 PulsePositionOutput GimbalOut;
 #define GIMBAL_PPM_PIN 5
+#endif
 int CamPan = 0;//Unused by GG
 int CamTilt = 0;//Unused by GG
 int GimbalMode = 0;

@@ -16,6 +16,9 @@ int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cyc
   
   if (Generator0<(Period/NumLegsPeriod)){//lifted leg segment
     float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*(Generator0-(Period/(2.0*(float)NumLegsPeriod))));//Periodic function that goes from -1 to 1 in 1/NumLegs of period
+    if(!(LegNumber%2)){//Invert legs 1 and 3
+      Generator1 = -Generator1;
+    }
     Modifiers[0] = Xtrans*Generator1;
     Modifiers[1] = Ytrans*Generator1;
     Modifiers[2] = Ztrans;
@@ -23,6 +26,9 @@ int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cyc
   }
   else{//Ground Leg Segment
     float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*((-Generator0/(NumLegsPeriod-1))+(Period/(2.0*((float)NumLegsPeriod-1)))));//Periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
+    if(!(LegNumber%2)){//Invert legs 1 and 3
+      Generator1 = -Generator1;
+    }
     Modifiers[0] = Xtrans*Generator1;
     Modifiers[1] = Ytrans*Generator1;
     Modifiers[2] = -Ztrans;

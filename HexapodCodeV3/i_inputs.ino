@@ -50,7 +50,7 @@
  */
 
 //Error state information
-#define CONTROL_PERIOD //How long before indicating communications problem
+#define CONTROL_PERIOD 1000 //How long before indicating communications problem
 unsigned long LastCommand = 0;
 
 
@@ -68,11 +68,11 @@ uint8_t Ext1 = 0;
 uint8_t Ext2 = 0;
 
 int ReadPacket(){//Read a packet from CommandSerial
-  if((millis()-LastCommand) > CONTROL_PERIOD){//check for error
-    bitWrite(ErrorState ERROR_CMD 1);
+  if ((millis() - LastCommand) >= CONTROL_PERIOD){//check for error
+    bitWrite(ErrorState, ERROR_CMD, 1);
   }
   else{
-    bitWrite(ErrorState ERROR_CMD 0);
+    bitWrite(ErrorState, ERROR_CMD, 0);
   }
 
   while((CommandSerial.available()>0)&&(CommandSerial.peek()!=255)){

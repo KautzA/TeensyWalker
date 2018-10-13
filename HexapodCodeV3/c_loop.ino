@@ -62,7 +62,7 @@ void loop() {
     digitalWrite(LED_YEL,LOW);
   }
   //Handle error LED patterns
-  if(ErrorState & b00000001){//DXL Error
+  if(ErrorState & B00000001){//DXL Error
     if(Tim1%500<150){
       digitalWrite(LED_RED,HIGH);
     }
@@ -70,7 +70,7 @@ void loop() {
       digitalWrite(LED_RED,LOW);
     }
   }
-  if(ErrorState & b00000010){//CMD error
+  if(ErrorState & B00000010){//CMD error
     if(Tim1%500<250){
       digitalWrite(LED_RED,HIGH);
     }

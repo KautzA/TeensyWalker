@@ -1,13 +1,16 @@
 
+const int SWERVEBASEWIDTH = 300;
+const int SWERVEBASELENGTH = 300;
 
-
-void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 300, int WheelLength = 300){
+void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 0, int WheelLength = 0){
   
-  Xmove = map(Xmove,-127,127,-100,100)/100;
-  Ymove = map(Ymove,-127,127,-100,100)/100;
-  Zrot  = map(Zrot,-127,127,314,-314)/100;//zrot is in radians and counterclockwise is positive
+  Xmove = float(map(Xmove,-127,127,-100,100))/100.0;
+  Ymove = float(map(Ymove,-127,127,-100,100))/100.0;
+  Zrot  = float(map(Zrot,-127,127,314,-314))/100.0;//zrot is in radians and counterclockwise is positive
+  WheelWidth = map(WheelWidth,-127,127,-100,100)+SWERVEBASEWIDTH;
+  WheelLength = map(WheelWidth,-127,127,-100,100)+SWERVEBASELENGTH;
   
-  //calcualte the leg positions
+  //calcualte the leg positions and output them
   int LegPos[NUM_LEGS][3] = {
                 {-WheelWidth/2,WheelLength/2,Leg0InitZ},
                 {WheelWidth/2,WheelLength/2,Leg1InitZ},
@@ -23,6 +26,7 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 300, int
   
   
   //Code that does the swerve steering--------------------------------------------------------
+  //idea taken from http://www.simbotics.org/resources/mobility/omnidirectional-drive
   float ModeA = Xmove - (Zrot*WheelLength/2);
   float ModeB = Xmove + (Zrot*WheelLength/2);
   float ModeC = Ymove - (Zrot*WheelWidth/2);

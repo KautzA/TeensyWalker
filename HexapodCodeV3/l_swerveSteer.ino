@@ -40,7 +40,7 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 300, int
       LegWheelSpherical2[i][j] = LegWheelSpherical1[i][j];
     }
   }
-  
+  //Scale values so largest has a max of 1
   if (LegWheelSpherical1[0][2] > 1){
     for(int i = 0; i < 4; i++){
       LegWheelSpherical2[i][2] /= LegWheelSpherical1[0][2];

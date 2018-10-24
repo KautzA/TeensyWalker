@@ -43,8 +43,8 @@ int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cyc
   
   int Output2[3];//Rotate
   
-  Output2[0] = (Output1[0]*cos(Modifiers[3])-Output1[1]*sin(Modifiers[3]));
-  Output2[1] = (Output1[0]*sin(Modifiers[3])+Output1[1]*cos(Modifiers[3]));
+  Output2[0] = (Output1[0]*cosf(Modifiers[3])-Output1[1]*sinf(Modifiers[3]));
+  Output2[1] = (Output1[0]*sinf(Modifiers[3])+Output1[1]*cosf(Modifiers[3]));
   Output2[2] = Output1[2];
   
   //Update input

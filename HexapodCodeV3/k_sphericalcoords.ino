@@ -36,7 +36,7 @@ void LocalSpherical(float Angles[NUM_LEGS][2]){
 void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float femur, float tibia){//Calculates new TibaRot and Tarsus based on local azimuth and elevation
   //float IniVect[3] = {cos(coxa)*sin(femur+tibia),sin(coxa)*cos(femur+tibia),cos(femur+tibia)};//vector of the leg(x,y,z)
   azimuth -=coxa;//The first rotation is faster this way, no trig compared to a cartesian rotation
-  float DesVect1[3] = {10*cos(azimuth)*sin(elevation),10*sin(azimuth)*sin(elevation),10*cos(elevation)};//output vector(x,y,z)
+  float DesVect1[3] = {10*cosf(azimuth)*sinf(elevation),10*sinf(azimuth)*sinf(elevation),10*cosf(elevation)};//output vector(x,y,z)
   float DesVect2[3];
   //desired vector
 
@@ -46,9 +46,9 @@ void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float fem
   
   
   float XZCorr[3][3] = {//Matrix to rotate point to be in proper loaction for sphericalcoords
-   { cos(pitch),0,sin(pitch)},
+   { cosf(pitch),0,sinf(pitch)},
    {          0,1,          0},
-   {-sin(pitch),0,cos(pitch)}
+   {-sinf(pitch),0,cosf(pitch)}
   };
   
   #if defined(UserSerialTransmit)
@@ -66,8 +66,8 @@ void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float fem
   DesVect2[1] = XZCorr[1][0]*DesVect1[0] + XZCorr[1][1]*DesVect1[1] + XZCorr[1][2]*DesVect1[2];
   DesVect2[2] = XZCorr[2][0]*DesVect1[0] + XZCorr[2][1]*DesVect1[1] + XZCorr[2][2]*DesVect1[2];
   
-  LegDynamixels[leg][3] = atan2(DesVect2[1],DesVect2[0]);//Tibia Rotation in Degrees
-  LegDynamixels[leg][4] = -(acos(DesVect2[2]/10));//Tarsus
+  LegDynamixels[leg][3] = atan2f(DesVect2[1],DesVect2[0]);//Tibia Rotation in Degrees
+  LegDynamixels[leg][4] = -(acosf(DesVect2[2]/10));//Tarsus
   
   #if defined(UserSerialTransmit)
     UserSerial.print("FirstShift x ");

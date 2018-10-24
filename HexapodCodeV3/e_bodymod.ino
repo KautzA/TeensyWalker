@@ -42,17 +42,17 @@ void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float
   
   float PitchMatrix[3][3] ={
    {1,         0,          0},
-   {0,cos(pitch),-sin(pitch)},
-   {0,sin(pitch), cos(pitch)}
+   {0,cosf(pitch),-sinf(pitch)},
+   {0,sinf(pitch), cosf(pitch)}
   };
   float RollMatrix[3][3] ={
-   { cos(roll),0,sin(roll)},
+   { cosf(roll),0,sinf(roll)},
    {         0,1,        0},
-   {-sin(roll),0,cos(roll)}
+   {-sinf(roll),0,cosf(roll)}
   };
   float YawMatrix[3][3] ={
-   {cos(yaw),-sin(yaw),0},
-   {sin(yaw), cos(yaw),0},
+   {cosf(yaw),-sinf(yaw),0},
+   {sinf(yaw), cosf(yaw),0},
    {       0,        0,1}
   };
   

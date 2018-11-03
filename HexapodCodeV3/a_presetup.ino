@@ -88,7 +88,7 @@ uint8_t InputExtend2;
 
 
 //GaitGenControlVars
-int GaitPeriod = 2500; //walk period
+int GaitPeriod = 2000; //walk period
 int GaitMoveX = 0;
 int GaitMoveY = 0;
 int GaitStepHeight = 0;

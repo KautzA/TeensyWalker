@@ -93,18 +93,16 @@ void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float fem
 
 
 void LegPlace (uint8_t leg, int Xplace, int Yplace, int Zplace, int Xrot, int Yrot, int Zrot){
-  int Output1[NUM_LEGS][3] = {//inital places
-    { //Leg 0
-      Leg0InitX, Leg0InitY, Leg0InitZ},
-    { //Leg 1
-      Leg1InitX, Leg1InitY, Leg1InitZ},
-    { //Leg 2
-      Leg2InitX, Leg2InitY, Leg2InitZ},
-    { //Leg 3
-      Leg3InitX, Leg3InitY, Leg3InitZ}
-  };
+  int Output0[NUM_LEGS][3];
+  for (int i = 0; i<NUM_LEGS; i++){
+    for (int j = 0; j<3; j++){
+      Output0[i][j] = InitialPositions[i][j];
+    }
+  }
   
-  
+  Output0[leg][0] = Xplace;
+  Output0[leg][1] = Yplace;
+  Output0[leg][2] = Zplace;
 }
 
 

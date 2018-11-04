@@ -50,20 +50,20 @@ void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
 
     //Second pass does gait rotate in place
     int Output2[NUM_LEGS][3];
-  Output2[0][0] = (Output1[0][0]*cos(Theta1)-Output1[0][1]*sin(Theta1));
-  Output2[0][1] = (Output1[0][0]*sin(Theta1)+Output1[0][1]*cos(Theta1));
+  Output2[0][0] = (Output1[0][0]*cosf(Theta1)-Output1[0][1]*sinf(Theta1));
+  Output2[0][1] = (Output1[0][0]*sinf(Theta1)+Output1[0][1]*cosf(Theta1));
   Output2[0][2] = Output1[0][2];
 
-  Output2[1][0] = (Output1[1][0]*cos(-Theta1)-Output1[1][1]*sin(-Theta1));
-  Output2[1][1] = (Output1[1][0]*sin(-Theta1)+Output1[1][1]*cos(-Theta1));
+  Output2[1][0] = (Output1[1][0]*cosf(-Theta1)-Output1[1][1]*sinf(-Theta1));
+  Output2[1][1] = (Output1[1][0]*sinf(-Theta1)+Output1[1][1]*cosf(-Theta1));
   Output2[1][2] = Output1[1][2];
 
-  Output2[2][0] = (Output1[2][0]*cos(Theta1)-Output1[2][1]*sin(Theta1));
-  Output2[2][1] = (Output1[2][0]*sin(Theta1)+Output1[2][1]*cos(Theta1));
+  Output2[2][0] = (Output1[2][0]*cosf(Theta1)-Output1[2][1]*sinf(Theta1));
+  Output2[2][1] = (Output1[2][0]*sinf(Theta1)+Output1[2][1]*cosf(Theta1));
   Output2[2][2] = Output1[2][2];
 
-  Output2[3][0] = (Output1[3][0]*cos(-Theta1)-Output1[3][1]*sin(-Theta1));
-  Output2[3][1] = (Output1[3][0]*sin(-Theta1)+Output1[3][1]*cos(-Theta1));
+  Output2[3][0] = (Output1[3][0]*cosf(-Theta1)-Output1[3][1]*sinf(-Theta1));
+  Output2[3][1] = (Output1[3][0]*sinf(-Theta1)+Output1[3][1]*cosf(-Theta1));
   Output2[3][2] = Output1[3][2];
 
   //Update GaitGenOut

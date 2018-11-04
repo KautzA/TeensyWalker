@@ -43,8 +43,8 @@
        1 -Nothing         - NA                                    - no function, does not reset any values
        2 -Ext1 Follows    - Ext1
        3 -Ext2 Follows    - Ext2
-       4 -Leg Place mode  - Selected leg, numbers are as above    - LV->x,LH->y,WV->Z,WH->WheelAzimuth,Buttons->WheelElevation, Ext1 to wheel rotation
-       5 -GaitMode        - Selected Gait                         - 0:MathGait,1:SwerveSteer,2:RuleGait
+       4 -Leg Place mode  - Selected leg, numbers are as above    - X->x,Y->y,Z->Z,Rz->WheelAzimuth,Rx->WheelElevation, Ry to wheel rotation
+       5 -GaitMode        - Selected Gait                         - 0:WalkPeriodic,1:CrawlPeriodic,2:SwerveSteer,3:RuleGait
        6 -
        7 -
        8 -

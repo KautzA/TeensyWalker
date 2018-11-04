@@ -161,7 +161,15 @@ void GetInputs(){
       GaitBodyZ = BODYUD;
       GaitBodyRoll = BODYROLL;
     }
-
+    
+    if (bitRead(InputButtons, ButtonRight1)){
+      MoveMode = MOVE_MODE_WALK_PERIODIC;
+    }
+    else if (bitRead(InputButtons, ButtonRight2)){
+      MoveMode = MOVE_MODE_CRAWL_PERIODIC;
+    }
+    
+    
     switch (InputExtend1 >> 4) {
     case 0://Reset Exended byte values
       break;

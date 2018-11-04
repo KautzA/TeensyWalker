@@ -48,11 +48,11 @@ void LegCalculate(){
     //UserSerial.print(((FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos))-(TibiaLength*TibiaLength))/(-2*sqrt((LegRadius*LegRadius)+(Zpos*Zpos))*TibiaLength));
     //UserSerial.println(",");
     
-    Output4[i][0] = -(atan(Ypos/Xpos));
+    Output4[i][0] = -(atanf(Ypos/Xpos));
     //Output4[i][0] = -(atan2(-Ypos,Xpos));
     ;//Coxa
-    Output4[i][1] = (atan2(Zpos,LegRadius) + acos(((FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos))-(TibiaLength*TibiaLength))/(-2*sqrt((LegRadius*LegRadius)+(Zpos*Zpos))*TibiaLength)));//Femur
-    Output4[i][2] = -(acos(((TibiaLength*TibiaLength)+(FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos)))/(-2*FemurLength*TibiaLength)));//Tibia
+    Output4[i][1] = (atan2f(Zpos,LegRadius) + acos(((FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos))-(TibiaLength*TibiaLength))/(-2*sqrt((LegRadius*LegRadius)+(Zpos*Zpos))*TibiaLength)));//Femur
+    Output4[i][2] = -(acosf(((TibiaLength*TibiaLength)+(FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos)))/(-2*FemurLength*TibiaLength)));//Tibia
     Output4[i][3] = (0);
     Output4[i][4] = (1.5707 + Output4[i][2] + Output4[i][1]);//Tharsus
   }

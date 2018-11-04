@@ -10,7 +10,7 @@ const uint8_t GaitLegOffset[NUM_LEGS] = {0,2,1,3};
   3(3) 1(2)
 */
 
-int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cycle,int Xtrans, int Ytrans,int Ztrans, int ZTurn, int NumLegsPeriod = NUM_LEGS){//translation for gait2
+int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cycle,int Xtrans, int Ytrans,int Ztrans, float ZTurn, int NumLegsPeriod = NUM_LEGS){//translation for gait2
   float Generator0 = (Cycle-((GaitLegOffset[LegNumber]*Period)/NumLegsPeriod))%Period; //generates cyclic values offeset for leg number.
   float Modifiers[4] = {0,0,0,0};
   
@@ -22,7 +22,7 @@ int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cyc
     Modifiers[0] = Xtrans*Generator1;
     Modifiers[1] = Ytrans*Generator1;
     Modifiers[2] = Ztrans;
-    Modifiers[3] = (ZTurn * 3.14 / 4 *Generator1);
+    Modifiers[3] = ((float)ZTurn * 3.14 / 4.0 *Generator1);
   }
   else{//Ground Leg Segment
     float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*((-Generator0/(NumLegsPeriod-1))+(Period/(2.0*((float)NumLegsPeriod-1)))));//Periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
@@ -43,8 +43,8 @@ int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cyc
   
   int Output2[3];//Rotate
   
-  Output2[0] = (Output1[0]*cos(Modifiers[3])-Output1[1]*sin(Modifiers[3]));
-  Output2[1] = (Output1[0]*sin(Modifiers[3])+Output1[1]*cos(Modifiers[3]));
+  Output2[0] = (Output1[0]*cosf(Modifiers[3])-Output1[1]*sinf(Modifiers[3]));
+  Output2[1] = (Output1[0]*sinf(Modifiers[3])+Output1[1]*cosf(Modifiers[3]));
   Output2[2] = Output1[2];
   
   //Update input

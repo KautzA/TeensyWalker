@@ -22,6 +22,8 @@
 #include<ax12Serial.h>   //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 #include<BioloidSerial.h> //KurtE's bioloid library https://github.com/KurtE/BioloidSerial
 
+#include<math.h> //enable use of cosf and sinf to use FPU
+
 #include <i2c_t3.h> //Teensy3.x I2C library to use hardware i2c
 
 #if defined(GIMBAL_ENABLE)//Gimbal Library
@@ -53,7 +55,8 @@
 #define MOVE_MODE_WALK_PERIODIC 0
 #define MOVE_MODE_CRAWL_PERIODIC 1
 #define MOVE_MODE_SWERVE 2
-#define MOVE_MODE_WALK_RULE 3
+#define MOVE_MODE_LEG_PLACE 3
+#define MOVE_MODE_WALK_RULE 4 //Not written yet
 
 uint8_t MoveMode = MOVE_MODE_WALK_PERIODIC;
 //uint8_t MoveMode = MOVE_MODE_CRAWL_PERIODIC;
@@ -85,7 +88,7 @@ uint8_t InputExtend2;
 
 
 //GaitGenControlVars
-int GaitPeriod = 2500; //walk period
+int GaitPeriod = 2000; //walk period
 int GaitMoveX = 0;
 int GaitMoveY = 0;
 int GaitStepHeight = 0;

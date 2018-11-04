@@ -17,6 +17,11 @@ void loop() {
   case MOVE_MODE_CRAWL_PERIODIC:
     GaitGen2(GaitPeriod,Tim1,GaitMoveX,GaitMoveY,GaitStepHeight,GaitMoveZrot);
     break;
+  /*
+  case MOVE_MODE_SWERVE
+    SwerveSteer(GaitMoveX, GaitMoveY, GaitMoveZrot, GaitStepHeight, GaitStepHeight)
+    break;
+  */
   }
   BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
   LegCoords();

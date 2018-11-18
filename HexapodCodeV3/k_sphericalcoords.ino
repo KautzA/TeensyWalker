@@ -103,6 +103,7 @@ void LegPlace (uint8_t leg, int Xplace, int Yplace, int Zplace, int Xrot, int Yr
   Output0[leg][0] = Xplace;
   Output0[leg][1] = Yplace;
   Output0[leg][2] = Zplace;
+  //more code here
 }
 
 

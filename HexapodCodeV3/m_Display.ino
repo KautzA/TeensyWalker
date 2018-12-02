@@ -1,3 +1,4 @@
+//display
 /* provide control for Display
  Requires changing Adafruit_SSD1306.cpp to change from wire.h to i2c_t3.h and commenting out compiler sections starting with "#ifndef __SAM3X8E__"
  

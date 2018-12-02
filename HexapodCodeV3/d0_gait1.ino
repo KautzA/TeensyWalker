@@ -1,3 +1,4 @@
+//gait1
 //This code covers the basic Gait Generator
 void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){
     //Sale the inputs

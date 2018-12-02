@@ -1,4 +1,4 @@
-
+//inputs
 //Defines for Reading Commander
 #define ButtonRight1   0
 #define ButtonRight2   1
@@ -170,8 +170,9 @@ void GetInputs(){
     }
     
     
-    switch (InputExtend1 >> 4) {
+    switch ((InputExtend1 >> 4) & 0x0f) {
     case 0://Reset Exended byte values
+      ExtMode0Reset();
       break;
     case 1://Do nothing
       break;
@@ -204,8 +205,8 @@ void GetInputs(){
   }
 }
 
-void ExtMode1Reset(){
-
+void ExtMode0Reset(){
+  MoveMode = MOVE_MODE_WALK_PERIODIC;
 }
 
 void ExtMode5GaitMode(uint8_t InputGaitMode){

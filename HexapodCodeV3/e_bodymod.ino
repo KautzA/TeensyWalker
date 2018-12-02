@@ -1,3 +1,4 @@
+//bodymod
 //This code covers the basic Gait Generator
 void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float yaw){//input is in degrees
   //Scale the inputs

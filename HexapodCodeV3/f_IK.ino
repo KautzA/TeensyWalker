@@ -1,3 +1,4 @@
+//ik
 //Translate global coordinates to local coordinates
 void LegCoords(){
   int Output3[NUM_LEGS][3];

@@ -1,3 +1,4 @@
+//servocontrol
 //map values to the servos, test for boundries and write to servos
 void DXLServoMap(){
   for (int i = 0; i < NUM_LEGS; i++){//Iterate through the legs

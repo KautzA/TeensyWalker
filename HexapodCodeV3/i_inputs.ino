@@ -217,7 +217,7 @@ void ExtMode5GaitMode(uint8_t InputGaitMode){
   case 1://Crawl Gait
     MoveMode = MOVE_MODE_CRAWL_PERIODIC;
     break;
-  case 2://Leg Place
+  case 2://Swerve Mode
     MoveMode = MOVE_MODE_SWERVE;
     break;
   case 3://Rule Gait

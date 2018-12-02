@@ -34,7 +34,7 @@ void LocalSpherical(float Angles[NUM_LEGS][2]){
 
 
 
-void LocalServoGen(int leg,float azimuth, float elevation, float coxa, float femur, float tibia){//Calculates new TibaRot and Tarsus based on local azimuth and elevation
+void LocalServoGenNoCorrection(int leg,float azimuth, float elevation, float coxa, float femur, float tibia){//Calculates new TibaRot and Tarsus based on local azimuth and elevation
   //float IniVect[3] = {cos(coxa)*sin(femur+tibia),sin(coxa)*cos(femur+tibia),cos(femur+tibia)};//vector of the leg(x,y,z)
   azimuth -=coxa;//The first rotation is faster this way, no trig compared to a cartesian rotation
   float DesVect1[3] = {

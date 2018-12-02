@@ -6,7 +6,7 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 0, int W
   
   Xmove = float(map(Xmove,-127,127,-100,100))/100.0;
   Ymove = float(map(Ymove,-127,127,-100,100))/100.0;
-  Zrot  = float(map(Zrot,-127,127,314,-314))/100.0;//zrot is in radians and counterclockwise is positive
+  Zrot  = float(map(Zrot,-127,127,314,-314))/100.0;//zrot is in radians from +x and counterclockwise is positive
   WheelWidth = map(WheelWidth,-127,127,-100,100)+SWERVEBASEWIDTH;
   WheelLength = map(WheelWidth,-127,127,-100,100)+SWERVEBASELENGTH;
   

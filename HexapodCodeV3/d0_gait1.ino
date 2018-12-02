@@ -10,7 +10,7 @@ void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   float Generator1 = ((4.0 *(abs((Cycle%Period)-(Period/2))-(Period/4)))/Period);
   float Generator2 = Generator1;
   int GeneratorZ = (-1*((abs((Cycle%Period)-(Period/2)))/((Cycle%Period)-(Period/2))));
-  float Theta1 = (ZTurn * 3.14 / 4 *Generator1);
+  float Theta1 = (ZTurn * PI / 4 *Generator1);
   
   //Type1 and Type two are added to legs to produce movement
   float Type1[3] = {

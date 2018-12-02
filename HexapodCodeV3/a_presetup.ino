@@ -255,10 +255,10 @@ const int InitialPositions [NUM_LEGS] [3] = {//x,y,z
 
 
 //Dimensions used in leg calculations
-#define CoxaLength 50
-#define FemurLength 93
-#define TibiaLength 97
-#define TharsusLength 25
+#define COXA_LENGTH 50
+#define FEMUR_LENGTH 93
+#define TIBIA_LENGTH 97
+#define TARSUS_LENGTH 25
 
 //Dimensions used to convert to local leg coords
 #define CogX 52 // distance that the legs are in left and right of the COG
@@ -266,10 +266,12 @@ const int InitialPositions [NUM_LEGS] [3] = {//x,y,z
 
 //Variable used to output from functions
 unsigned long Tim1;
-int GaitGenOut[NUM_LEGS][3]; // For GaitGen
-int BodyModOut[NUM_LEGS][3]; // for BodyMod
-int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut
-float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut
+int GaitGenOut[NUM_LEGS][3]; // For GaitGen [leg] [x,y,z]
+int BodyModOut[NUM_LEGS][3]; // for BodyMod [leg] [x,y,z]
+int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut, [leg] [x,y,z]
+float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut, [leg] [servo]
+float LegGlobalSpherical[NUM_LEGS][3]; //For ???, [leg] [Azimuth, Elevation, Bank]
+float LegLocalSpherical[NUM_LEGS][3];  //For LocalSpherical, [leg] [Azimuth, Elevation, Bank]
 
 
 

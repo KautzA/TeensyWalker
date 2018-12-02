@@ -3,7 +3,7 @@
 void DXLServoMap(){
   for (int i = 0; i < NUM_LEGS; i++){//Iterate through the legs
     for (int j = 0; j < NUM_SERVOS_PER_LEG; j++){//Iterate through the servos on each leg
-      int DegreeAngle = LegDynamixels[i][j] * (180/3.14159);
+      int DegreeAngle = LegDynamixels[i][j] * (180.0/PI);
       int ServoPos = map(DegreeAngle, -150, 150, 0, 1024);
       if ((ServoPos > DXLServoLimits[i][j][0])&&(ServoPos < DXLServoLimits[i][j][1])){// Servo is within limits
         ServoWrite(DXLServoLimits[i][j][2],ServoPos);

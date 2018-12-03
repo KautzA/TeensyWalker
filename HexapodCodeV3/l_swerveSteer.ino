@@ -2,20 +2,22 @@
 const int SWERVEBASEWIDTH = 300;
 const int SWERVEBASELENGTH = 300;
 
-void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 0, int WheelLength = 0){
-  
+void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth, int WheelLength){
+  //map inputs
   Xmove = float(map(Xmove,-127,127,-100,100))/100.0;
   Ymove = float(map(Ymove,-127,127,-100,100))/100.0;
   Zrot  = float(map(Zrot,-127,127,314,-314))/100.0;//zrot is in radians from +x and counterclockwise is positive
   WheelWidth = map(WheelWidth,-127,127,-100,100)+SWERVEBASEWIDTH;
   WheelLength = map(WheelWidth,-127,127,-100,100)+SWERVEBASELENGTH;
   
+  float WheelVelocity = 0.001; //value unknown
+  
   //calcualte the leg positions and output them
   int LegPos[NUM_LEGS][3] = {
-                {-WheelWidth/2,WheelLength/2,Leg0InitZ},
-                {WheelWidth/2,WheelLength/2,Leg1InitZ},
-                {WheelWidth/2,-WheelLength/2,Leg2InitZ},
-                {-WheelWidth/2,-WheelLength/2,Leg3InitZ}};
+                {-WheelWidth/2,WheelLength/2,InitialPositions[0][2]},
+                {WheelWidth/2,WheelLength/2,InitialPositions[1][2]},
+                {WheelWidth/2,-WheelLength/2,InitialPositions[2][2]},
+                {-WheelWidth/2,-WheelLength/2,InitialPositions[3][2]}};
   for(int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < 3; j++){
       GaitGenOut[i][j] = LegPos[i][j];
@@ -38,12 +40,15 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 0, int W
     {atan2(ModeA,ModeD),0,sqrt(ModeA*ModeA+ModeD*ModeD)},//BL
     {atan2(ModeB,ModeD),0,sqrt(ModeB*ModeB+ModeD*ModeD)}};//FL
   
+  //duplicate values for scaling
   float LegWheelSpherical2[4][3];
   for(int i = 0; i < 4; i++){
     for(int j = 0; j < 3; j++){
       LegWheelSpherical2[i][j] = LegWheelSpherical1[i][j];
     }
   }
+  
+  
   //Scale values so largest has a max of 1
   if (LegWheelSpherical1[0][2] > 1){
     for(int i = 0; i < 4; i++){
@@ -66,5 +71,10 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth = 0, int W
     }
   }
   
-  //Set the legs and motors
+  //Set the spherical part
+  for(int i = 0; i < 3; i++){
+    LegGlobalSpherical[i][0] = LegWheelSpherical1[1][0];
+    LegGlobalSpherical[i][1] = LegWheelSpherical1[1][1];
+    LegGlobalSpherical[i][2] += LegWheelSpherical1[1][2]*WheelVelocity;
+  }
 }

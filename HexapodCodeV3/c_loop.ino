@@ -14,25 +14,25 @@ void loop() {
   switch (MoveMode){
   case MOVE_MODE_WALK_PERIODIC:
     GaitGen1(GaitPeriod,Tim1,GaitMoveX,GaitMoveY,GaitStepHeight,GaitMoveZrot);
+    BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
+    LegCoords();
+    LegCalculate();
     break;
   case MOVE_MODE_CRAWL_PERIODIC:
     GaitGen2(GaitPeriod,Tim1,GaitMoveX,GaitMoveY,GaitStepHeight,GaitMoveZrot);
+    BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
+    LegCoords();
+    LegCalculate();
     break;
-  /*
-  case MOVE_MODE_SWERVE
-    SwerveSteer(GaitMoveX, GaitMoveY, GaitMoveZrot, GaitStepHeight, GaitStepHeight)
+  case MOVE_MODE_SWERVE:
+    SwerveSteer(GaitMoveX, GaitMoveY, GaitMoveZrot, GaitStepHeight, GaitStepHeight);
+    BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
+    LegCoords();
+    LocalSpherical();
+    LegPlaceSixCalculate();
     break;
-  */
   }
-  BodyMod(GaitBodyX,GaitBodyY,GaitBodyZ,GaitBodyPitch,GaitBodyRoll,GaitBodyYaw);
-  LegCoords();
-  LegCalculate();
-
-  for(int i = 0; i < NUM_LEGS; i++){//Update LegDynamixels
-    for(int j = 0; j < NUM_SERVOS_PER_LEG; j++){
-      LegDynamixels[i][j] = LegCalculateOut[i][j];
-    }
-  }
+  
 
   //sphericalCoords goes here
 

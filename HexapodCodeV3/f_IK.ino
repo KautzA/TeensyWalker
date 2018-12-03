@@ -59,7 +59,7 @@ void LegCalculate(){
   }
   for (int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < NUM_SERVOS_PER_LEG; j++){
-      LegCalculateOut[i][j] = Output4[i][j];
+      LegDynamixels[i][j] = Output4[i][j];
     }
   }
 }

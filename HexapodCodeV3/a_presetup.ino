@@ -269,9 +269,10 @@ unsigned long Tim1;
 int GaitGenOut[NUM_LEGS][3]; // For GaitGen [leg] [x,y,z]
 int BodyModOut[NUM_LEGS][3]; // for BodyMod [leg] [x,y,z]
 int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut, [leg] [x,y,z]
-float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut, [leg] [servo]
-float LegGlobalSpherical[NUM_LEGS][3]; //For ???, [leg] [Azimuth, Elevation, Bank]
+//float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut, [leg] [servo] //not used
+float LegGlobalSpherical[NUM_LEGS][3]; //For GaitGen/SwerveSteer, [leg] [Azimuth, Elevation, Bank]
 float LegLocalSpherical[NUM_LEGS][3];  //For LocalSpherical, [leg] [Azimuth, Elevation, Bank]
+
 
 
 

@@ -5,11 +5,11 @@ const uint8_t GaitLegOffset[NUM_LEGS] = {
   0,2,1,3};
 /*
     Order (number)
- 0(0) 2(1)
- \\ //
- 5(5)-- --4(6)
- // \\
- 3(3) 1(2)
+   0(0) 2(1)
+     \\ //
+ 5(4)-- --4(5)
+     // \\
+   3(3) 1(2)
  */
 
 int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cycle,int Xtrans, int Ytrans,int Ztrans, float ZTurn, int NumLegsPeriod = NUM_LEGS){//translation for gait2

@@ -68,7 +68,7 @@ void GaitGen2(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   int Output0[NUM_LEGS][3];
   for (int i = 0; i<NUM_LEGS; i++){
     for (int j = 0; j<3; j++){
-      Output0[i][j] = InitialPositions[i][j];
+      output0[i][j] = kInitialPositions[i][j];
     }
   }
 

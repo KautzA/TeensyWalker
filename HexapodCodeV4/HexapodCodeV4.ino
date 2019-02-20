@@ -62,8 +62,17 @@
           2 - Swerve Mode (Swerve Steering)
           3 - Rule based gait (Rule based)
           
- 
-
+ Status Lights
+   RGB User Light
+     Blue - light fades to show running
+     Green - indicates valid input packets
+     Red - indicates an error
+   Board Lights from edge to center
+     Blue - XBee Assoc
+     Yellow - XBee RSSI
+     Green - XBee On
+     Red - Error
+     Green - Running Blink
  */
 
 

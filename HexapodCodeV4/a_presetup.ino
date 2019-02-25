@@ -42,10 +42,13 @@
 
 
 
-
+//Error LED
 #define LED_RUNNING 24 //red led by Xbee
 #define LED_ERROR 12 //yellow led by Xbee
 
+//UI LEDs
+#define LED_RGB_ON HIGH //On state for LEDs
+#define LED_RGB_OFF LOW //Off state for LEDS
 #define LED_RGB_RED 23 //red LED on indicator button
 #define LED_RGB_GRE 22 //green LED on indicator button
 #define LED_RGB_BLU 21 //blue LED on indicator button

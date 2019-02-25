@@ -1,8 +1,7 @@
 //gait2
 //This code covers the crawl Gait Generator
 //WIP
-const uint8_t GaitLegOffset[NUM_LEGS] = {
-  0,2,1,3};
+const uint8_t GaitLegOffset[NUM_LEGS] = {0,2,1,3};
 /*
     Order (number)
    0(0) 2(1)

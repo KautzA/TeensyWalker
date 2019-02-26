@@ -1,10 +1,10 @@
 //gait1
 //This code covers the basic Gait Generator it moves diagonal pairs of legs on a quad
-void GaitGen1(int period, int cycle, int trans_x, int trans_y, int trans_z, float turn_z){
+void GaitGen1(int period, int cycle, int translate_x, int translate_y, int translate_z, float turn_z){
   //Sale the inputs
-  trans_x =map(trans_x,-127,127,-40,40);
-  trans_y =map(trans_y,-127,127,-40,40);
-  trans_z =map(trans_z,-127,127,0,20);
+  translate_x =map(translate_x,-127,127,-40,40);
+  translate_y =map(translate_y,-127,127,-40,40);
+  translate_z =map(translate_z,-127,127,0,20);
   turn_z  =-map(turn_z,-127,127,-50,50)/100;
 
   float generator1 = ((4.0 *(abs((cycle%period)-(period/2))-(period/4)))/period);
@@ -12,8 +12,8 @@ void GaitGen1(int period, int cycle, int trans_x, int trans_y, int trans_z, floa
   float theta1 = (turn_z * PI / 4 *generator1);
   
   //Type1 and Type two are added to legs to produce movement
-  float offsets1[3] = {(trans_x*generator1),(trans_y*generator1),(trans_z*generator_z)};
-  float offsets2[3] = {(trans_x*generator1),(trans_y*generator1),(-trans_z*generator_z)};
+  float offsets1[3] = {(translate_x*generator1),(translate_y*generator1),(translate_z*generator_z)};
+  float offsets2[3] = {(translate_x*generator1),(translate_y*generator1),(-translate_z*generator_z)};
 
 
   //First pass does gait generation for translation

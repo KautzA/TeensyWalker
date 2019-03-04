@@ -1,7 +1,7 @@
 //gait2
 //This code covers the crawl Gait Generator
 //WIP
-const uint8_t GaitLegOffset[NUM_LEGS] = {0,2,1,3};
+const uint8_t kGaitLegOffset[NUM_LEGS] = {0,2,1,3};
 /*
     Order (number)
    0(0) 2(1)
@@ -11,60 +11,61 @@ const uint8_t GaitLegOffset[NUM_LEGS] = {0,2,1,3};
    3(3) 1(2)
  */
 
-int GaitGen2Cycle(int InputArray[NUM_LEGS][3],int LegNumber, int Period, int Cycle,int Xtrans, int Ytrans,int Ztrans, float ZTurn, int NumLegsPeriod = NUM_LEGS){//translation for gait2
-  float Generator0 = (Cycle-((GaitLegOffset[LegNumber]*Period)/NumLegsPeriod))%Period; //generates cyclic values offeset for leg number.
-  float Modifiers[4] = {
+int GaitGen2Cycle(int input_array[NUM_LEGS][3],int leg_number, int period, int cycle,int translate_x, int translate_y,int translate_z, float turn_z){//translation for gait2
+  int num_legs_period = NUM_LEGS;
+  float generator0 = (cycle-((kGaitLegOffset[leg_number]*period)/num_legs_period))%period; //generates cyclic values offeset for leg number.
+  float modifiers[4] = {
     0,0,0,0  };
 
-  if (Generator0<(Period/NumLegsPeriod)){//lifted leg segment
-    float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*(Generator0-(Period/(2.0*(float)NumLegsPeriod))));//Periodic function that goes from -1 to 1 in 1/NumLegs of period
-    if(!(LegNumber%2)){//Invert legs 1 and 3
-      Generator1 = -Generator1;
+  if (generator0<(period/num_legs_period)){//lifted leg segment
+    float generator1 = ((2.0*(float)num_legs_period/period)*(generator0-(period/(2.0*(float)num_legs_period))));//periodic function that goes from -1 to 1 in 1/NumLegs of period
+    if(!(leg_number%2)){//Invert legs 1 and 3
+      generator1 = -generator1;
     }
-    Modifiers[0] = Xtrans*Generator1;
-    Modifiers[1] = Ytrans*Generator1;
-    Modifiers[2] = Ztrans;
-    Modifiers[3] = ((float)ZTurn * PI / 4.0 *Generator1);
+    modifiers[0] = translate_x*generator1;
+    modifiers[1] = translate_y*generator1;
+    modifiers[2] = translate_z;
+    modifiers[3] = ((float)turn_z * PI / 4.0 *generator1);
   }
   else{//Ground Leg Segment
-    float Generator1 = ((2.0*(float)NumLegsPeriod/Period)*((-Generator0/(NumLegsPeriod-1))+(Period/(2.0*((float)NumLegsPeriod-1)))));//Periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
-    if(!(LegNumber%2)){//Invert legs 1 and 3
-      Generator1 = -Generator1;
+    float generator1 = ((2.0*(float)num_legs_period/period)*((-generator0/(num_legs_period-1))+(period/(2.0*((float)num_legs_period-1)))));//periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
+    if(!(leg_number%2)){//Invert legs 1 and 3
+      generator1 = -generator1;
     }
-    Modifiers[0] = Xtrans*Generator1;
-    Modifiers[1] = Ytrans*Generator1;
-    Modifiers[2] = -Ztrans;
-    Modifiers[3] = (ZTurn * PI / 4 *Generator1);
+    modifiers[0] = translate_x*generator1;
+    modifiers[1] = translate_y*generator1;
+    modifiers[2] = -translate_z;
+    modifiers[3] = (turn_z * PI / 4 *generator1);
   }
 
   int Output1[3];//Translate
 
-  Output1[0] = InputArray[LegNumber][0] + Modifiers[0];//X
-  Output1[1] = InputArray[LegNumber][1] + Modifiers[1];//Y
-  Output1[2] = InputArray[LegNumber][2] + Modifiers[2];//Z
+  Output1[0] = input_array[leg_number][0] + modifiers[0];//X
+  Output1[1] = input_array[leg_number][1] + modifiers[1];//Y
+  Output1[2] = input_array[leg_number][2] + modifiers[2];//Z
 
   int Output2[3];//Rotate
 
-  Output2[0] = (Output1[0]*cosf(Modifiers[3])-Output1[1]*sinf(Modifiers[3]));
-  Output2[1] = (Output1[0]*sinf(Modifiers[3])+Output1[1]*cosf(Modifiers[3]));
+  Output2[0] = (Output1[0]*cosf(modifiers[3])-Output1[1]*sinf(modifiers[3]));
+  Output2[1] = (Output1[0]*sinf(modifiers[3])+Output1[1]*cosf(modifiers[3]));
   Output2[2] = Output1[2];
 
   //Update input
 
-  InputArray[LegNumber][0] = Output2[0];
-  InputArray[LegNumber][1] = Output2[1];
-  InputArray[LegNumber][2] = Output2[2];
+  input_array[leg_number][0] = Output2[0];
+  input_array[leg_number][1] = Output2[1];
+  input_array[leg_number][2] = Output2[2];
 }
 
-void GaitGen2(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){
+void GaitGen2(int period, int cycle, int translate_x, int translate_y, int translate_z, float turn_z){
   //Sale the inputs
-  Xtrans =map(Xtrans,-127,127,-40,40);
-  Ytrans =map(Ytrans,-127,127,-40,40);
-  Ztrans =map(Ztrans,-127,127,0,20);
-  ZTurn  =-map(ZTurn,-127,127,-50,50)/100;
+  translate_x =map(translate_x,-127,127,-40,40);
+  translate_y =map(translate_y,-127,127,-40,40);
+  translate_z =map(translate_z,-127,127,0,20);
+  turn_z  =-map(turn_z,-127,127,-50,50)/100;
 
   //First pass, sets base position
-  int Output0[NUM_LEGS][3];
+  int output0[NUM_LEGS][3];
   for (int i = 0; i<NUM_LEGS; i++){
     for (int j = 0; j<3; j++){
       output0[i][j] = kInitialPositions[i][j];
@@ -72,7 +73,7 @@ void GaitGen2(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   }
 
   for(int i = 0; i<NUM_LEGS; i++){
-    GaitGen2Cycle(Output0,i,Period,Cycle,Xtrans,Ytrans,Ztrans,ZTurn);
+    GaitGen2Cycle(output0,i,period,cycle,translate_x,translate_y,translate_z,turn_z);
   }
 
 
@@ -81,7 +82,7 @@ void GaitGen2(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   //Update GaitGenOut
   for(int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < 3; j++){
-      GaitGenOut[i][j] = Output0[i][j];
+      gait_gen_out[i][j] = output0[i][j];
     }
   }
 }

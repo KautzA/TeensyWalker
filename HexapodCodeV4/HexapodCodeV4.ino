@@ -1,7 +1,7 @@
 /*
  Code by Alchemsit_Arthur for a teensy 3.6 based quad. Can also be used on a hexapod.
  V4 rewrite to clean up structure to axproximately align with google's C++ style guide https://google.github.io/styleguide/cppguide.html
- presetup, setup,loop  have been updated
+ presetup, setup ,loop, gait1, gait2  have been updated
 
  uses globals for leg transitions. Also uses floats.
  Y Axis is to the Front

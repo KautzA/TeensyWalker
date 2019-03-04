@@ -18,7 +18,7 @@ void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float
   yaw = yaw*0.0174533;
   for (int i = 0; i < NUM_LEGS; i++){
     for (int j = 0; j <3; j++){
-      BodyOutput1[i][j] = GaitGenOut[i][j];
+      BodyOutput1[i][j] = gait_gen_out[i][j];
     }
   }
   
@@ -100,7 +100,7 @@ void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float
   //Update GaitGenOut
   for(int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < 3; j++){
-      BodyModOut[i][j] = BodyOutput2[i][j];
+      body_mod_out[i][j] = BodyOutput2[i][j];
     }
   }
 

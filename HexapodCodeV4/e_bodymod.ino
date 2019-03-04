@@ -1,57 +1,57 @@
 //bodymod
 //This code covers the basic Gait Generator
-void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float yaw){//input is in degrees
+void BodyMod(int translate_x, int translate_y, float translate_z, float pitch, float roll, float yaw){//input is in degrees
   //Scale the inputs
-  Xlean    =map(Xlean,-127,127,-40,40);
-  Ylean    =map(Ylean,-127,127,-40,40);
-  Zheight  =map(Zheight,-127,127,-40,40);
+  translate_x    =map(translate_x,-127,127,-40,40);
+  translate_y    =map(translate_y,-127,127,-40,40);
+  translate_z  =map(translate_z,-127,127,-40,40);
   pitch    =map(pitch,-127,127,-30,30);
   roll     =map(roll,-127,127,-30,30);
   yaw      =map(yaw,-127,127,-30,30);
 
 
 
-  int BodyOutput1[NUM_LEGS][3];
-  int BodyOutput2[NUM_LEGS][3];
+  int body_output_1[NUM_LEGS][3];
+  int body_output_2[NUM_LEGS][3];
   pitch = pitch*0.0174533;
   roll = roll*0.0174533;
   yaw = yaw*0.0174533;
   for (int i = 0; i < NUM_LEGS; i++){
     for (int j = 0; j <3; j++){
-      BodyOutput1[i][j] = gait_gen_out[i][j];
+      body_output_1[i][j] = gait_gen_out[i][j];
     }
   }
   
   //First pass does body translate relative to legs
 
-  BodyOutput1[0][0] += Xlean;
-  BodyOutput1[0][1] += Ylean;
-  BodyOutput1[0][2] -= Zheight;
+  body_output_1[0][0] += translate_x;
+  body_output_1[0][1] += translate_y;
+  body_output_1[0][2] -= translate_z;
 
-  BodyOutput1[1][0] -= Xlean;
-  BodyOutput1[1][1] -= Ylean;
-  BodyOutput1[1][2] -= Zheight;
+  body_output_1[1][0] -= translate_x;
+  body_output_1[1][1] -= translate_y;
+  body_output_1[1][2] -= translate_z;
 
-  BodyOutput1[2][0] += Xlean;
-  BodyOutput1[2][1] += Ylean;
-  BodyOutput1[2][2] -= Zheight;
+  body_output_1[2][0] += translate_x;
+  body_output_1[2][1] += translate_y;
+  body_output_1[2][2] -= translate_z;
 
-  BodyOutput1[3][0] -= Xlean;
-  BodyOutput1[3][1] -= Ylean;
-  BodyOutput1[3][2] -= Zheight;
+  body_output_1[3][0] -= translate_x;
+  body_output_1[3][1] -= translate_y;
+  body_output_1[3][2] -= translate_z;
   
   
-  float PitchMatrix[3][3] ={
+  float pitch_matrix[3][3] ={
    {1,         0,          0},
    {0,cosf(pitch),-sinf(pitch)},
    {0,sinf(pitch), cosf(pitch)}
   };
-  float RollMatrix[3][3] ={
+  float roll_matrix[3][3] ={
    { cosf(roll),0,sinf(roll)},
    {         0,1,        0},
    {-sinf(roll),0,cosf(roll)}
   };
-  float YawMatrix[3][3] ={
+  float yaw_matrix[3][3] ={
    {cosf(yaw),-sinf(yaw),0},
    {sinf(yaw), cosf(yaw),0},
    {       0,        0,1}
@@ -59,48 +59,48 @@ void BodyMod(int Xlean, int Ylean, float Zheight, float pitch, float roll, float
   
   //Pitch
   for(int i = 0; i < NUM_LEGS; i++){
-    BodyOutput2[i][0] = PitchMatrix[0][0]*BodyOutput1[i][0] + PitchMatrix[0][1]*BodyOutput1[i][1] + PitchMatrix[0][2]*BodyOutput1[i][2];
-    BodyOutput2[i][1] = PitchMatrix[1][0]*BodyOutput1[i][0] + PitchMatrix[1][1]*BodyOutput1[i][1] + PitchMatrix[1][2]*BodyOutput1[i][2];
-    BodyOutput2[i][2] = PitchMatrix[2][0]*BodyOutput1[i][0] + PitchMatrix[2][1]*BodyOutput1[i][1] + PitchMatrix[2][2]*BodyOutput1[i][2];
+    body_output_2[i][0] = pitch_matrix[0][0]*body_output_1[i][0] + pitch_matrix[0][1]*body_output_1[i][1] + pitch_matrix[0][2]*body_output_1[i][2];
+    body_output_2[i][1] = pitch_matrix[1][0]*body_output_1[i][0] + pitch_matrix[1][1]*body_output_1[i][1] + pitch_matrix[1][2]*body_output_1[i][2];
+    body_output_2[i][2] = pitch_matrix[2][0]*body_output_1[i][0] + pitch_matrix[2][1]*body_output_1[i][1] + pitch_matrix[2][2]*body_output_1[i][2];
   }
   //Roll
   for(int i = 0; i < NUM_LEGS; i++){
-    BodyOutput1[i][0] = RollMatrix[0][0]*BodyOutput2[i][0] + RollMatrix[0][1]*BodyOutput2[i][1] + RollMatrix[0][2]*BodyOutput2[i][2];
-    BodyOutput1[i][1] = RollMatrix[1][0]*BodyOutput2[i][0] + RollMatrix[1][1]*BodyOutput2[i][1] + RollMatrix[1][2]*BodyOutput2[i][2];
-    BodyOutput1[i][2] = RollMatrix[2][0]*BodyOutput2[i][0] + RollMatrix[2][1]*BodyOutput2[i][1] + RollMatrix[2][2]*BodyOutput2[i][2];
+    body_output_1[i][0] = roll_matrix[0][0]*body_output_2[i][0] + roll_matrix[0][1]*body_output_2[i][1] + roll_matrix[0][2]*body_output_2[i][2];
+    body_output_1[i][1] = roll_matrix[1][0]*body_output_2[i][0] + roll_matrix[1][1]*body_output_2[i][1] + roll_matrix[1][2]*body_output_2[i][2];
+    body_output_1[i][2] = roll_matrix[2][0]*body_output_2[i][0] + roll_matrix[2][1]*body_output_2[i][1] + roll_matrix[2][2]*body_output_2[i][2];
   }
   //Yaw
   for(int i = 0; i < NUM_LEGS; i++){
-    BodyOutput2[i][0] = YawMatrix[0][0]*BodyOutput1[i][0] + YawMatrix[0][1]*BodyOutput1[i][1] + YawMatrix[0][2]*BodyOutput1[i][2];
-    BodyOutput2[i][1] = YawMatrix[1][0]*BodyOutput1[i][0] + YawMatrix[1][1]*BodyOutput1[i][1] + YawMatrix[1][2]*BodyOutput1[i][2];
-    BodyOutput2[i][2] = YawMatrix[2][0]*BodyOutput1[i][0] + YawMatrix[2][1]*BodyOutput1[i][1] + YawMatrix[2][2]*BodyOutput1[i][2];
+    body_output_2[i][0] = yaw_matrix[0][0]*body_output_1[i][0] + yaw_matrix[0][1]*body_output_1[i][1] + yaw_matrix[0][2]*body_output_1[i][2];
+    body_output_2[i][1] = yaw_matrix[1][0]*body_output_1[i][0] + yaw_matrix[1][1]*body_output_1[i][1] + yaw_matrix[1][2]*body_output_1[i][2];
+    body_output_2[i][2] = yaw_matrix[2][0]*body_output_1[i][0] + yaw_matrix[2][1]*body_output_1[i][1] + yaw_matrix[2][2]*body_output_1[i][2];
   }
   //Second pass does pitch (ZY)
   /*for(int i = 0; i < 4; i++){
-    BodyOutput2[i][0] = BodyOutput1[i][0];
-    BodyOutput2[i][1] = (BodyOutput1[i][2]*cos(pitch)-BodyOutput1[i][1]*sin(pitch));
-    BodyOutput2[i][2] = (BodyOutput1[i][2]*cos(pitch)-BodyOutput1[i][1]*sin(pitch));
+    body_output_2[i][0] = body_output_1[i][0];
+    body_output_2[i][1] = (body_output_1[i][2]*cos(pitch)-body_output_1[i][1]*sin(pitch));
+    body_output_2[i][2] = (body_output_1[i][2]*cos(pitch)-body_output_1[i][1]*sin(pitch));
   }
   
   //Third pass does roll (ZX)
   for(int i = 0; i < 4; i++){
-    BodyOutput1[i][0] = (BodyOutput2[i][0]*cos(roll)-BodyOutput2[i][2]*sin(roll));
-    BodyOutput1[i][1] = BodyOutput2[i][1];
-    BodyOutput1[i][2] = (BodyOutput2[i][0]*cos(roll)-BodyOutput2[i][2]*sin(roll));
+    body_output_1[i][0] = (body_output_2[i][0]*cos(roll)-body_output_2[i][2]*sin(roll));
+    body_output_1[i][1] = body_output_2[i][1];
+    body_output_1[i][2] = (body_output_2[i][0]*cos(roll)-body_output_2[i][2]*sin(roll));
   }
 
   //Fourth pass does yaw (XY)
   for(int i = 0; i < 4; i++){
-    BodyOutput2[i][0] = (BodyOutput1[i][0]*cos(yaw)-BodyOutput1[i][1]*sin(yaw));
-    BodyOutput2[i][1] = (BodyOutput1[i][0]*cos(yaw)-BodyOutput1[i][1]*sin(yaw));
-    BodyOutput2[i][2] = BodyOutput1[i][2];
+    body_output_2[i][0] = (body_output_1[i][0]*cos(yaw)-body_output_1[i][1]*sin(yaw));
+    body_output_2[i][1] = (body_output_1[i][0]*cos(yaw)-body_output_1[i][1]*sin(yaw));
+    body_output_2[i][2] = body_output_1[i][2];
   }*/
 
 
   //Update GaitGenOut
   for(int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < 3; j++){
-      body_mod_out[i][j] = BodyOutput2[i][j];
+      body_mod_out[i][j] = body_output_2[i][j];
     }
   }
 

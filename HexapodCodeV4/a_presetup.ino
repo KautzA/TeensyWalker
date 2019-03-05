@@ -139,7 +139,7 @@ BioloidControllerEx bioloid = BioloidControllerEx();
 
 //Limits and id for each motor in the design in order  min, max, ID
 //ServoLimits
-const int kDXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
+const int kDXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {//min,max,ID
   {//Leg0
     {538,759,2}, //Leg0 Coxa
     {183,813,3}, //Leg0 Femur

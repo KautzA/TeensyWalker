@@ -11,19 +11,19 @@
 
 //What input is which----------------------------------------
 //Move Mode(for analog)---------------
-#define MOVELR InputX
-#define MOVEFB -InputY
-#define MOVEYAW InputRz
-#define MOVEUD -InputZ
-//      CamPan  EXT1 (in = 0) = 0 (in > 0) -= 8
-//      CamTilt EXT2 (in = 0) = 0 (in > 0) -= 8
+#define MOVELR input_x
+#define MOVEFB -input_y
+#define MOVEYAW input_rz
+#define MOVEUD -input_z
+//      cam_pan  EXT1 (in = 0) = 0 (in > 0) -= 8
+//      cam_tilt EXT2 (in = 0) = 0 (in > 0) -= 8
 //Body Mode(for analog)----------------
-#define BODYLR InputX
-#define BODYFB -InputY 
-#define BODYUD -InputZ
-#define BODYYAW -InputRz
-#define BODYPITCH -InputRx
-#define BODYROLL InputRy
+#define BODYLR input_x
+#define BODYFB -input_y 
+#define BODYUD -input_z
+#define BODYYAW -input_rz
+#define BODYPITCH -input_rx
+#define BODYROLL input_ry
 //      BODYHEIGHT EXT1 (in = 0) = 0 (in > 0) = 8
 //      BODYROLL   EXT2 (in = 0) = 0 (in > 0) = 8
 //Buttons(mode independant)
@@ -69,18 +69,18 @@ uint8_t Ext2 = 0;
 
 int ReadPacket(){//Read a packet from CommandSerial
   if ((millis() - LastCommand) >= CONTROL_PERIOD){//check for error
-    bitWrite(ErrorState, ERROR_CMD, 1);
+    bitWrite(error_state, ERROR_CMD, 1);
   }
   else{
-    bitWrite(ErrorState, ERROR_CMD, 0);
+    bitWrite(error_state, ERROR_CMD, 0);
   }
 
-  while((CommandSerial.available()>0)&&(CommandSerial.peek()!=255)){
-    CommandSerial.read();
+  while((COMMAND_SERIAL.available()>0)&&(COMMAND_SERIAL.peek()!=255)){
+    COMMAND_SERIAL.read();
   }
 
-  if (CommandSerial.available() > 11){
-    CommandSerial.readBytes(IncomingBuffer, 12);
+  if (COMMAND_SERIAL.available() > 11){
+    COMMAND_SERIAL.readBytes(IncomingBuffer, 12);
     CommandChecksum = 0;
     for(int i = 2;i<12;i++){
       CommandChecksum += IncomingBuffer[i];
@@ -98,15 +98,15 @@ int ReadPacket(){//Read a packet from CommandSerial
       return -2;
     }
     else{//ValidChecksum
-      InputX = (int8_t)( (int)IncomingBuffer[2]-128 );
-      InputY = (int8_t)( (int)IncomingBuffer[3]-128 );
-      InputZ = (int8_t)( (int)IncomingBuffer[4]-128 );
-      InputRx = (int8_t)( (int)IncomingBuffer[5]-128 );
-      InputRy = (int8_t)( (int)IncomingBuffer[6]-128 );
-      InputRz = (int8_t)( (int)IncomingBuffer[7]-128 );
-      InputButtons = (uint8_t)(IncomingBuffer[8]);
-      InputExtend1 = (uint8_t)(IncomingBuffer[9]);
-      InputExtend2 = (uint8_t)(IncomingBuffer[10]);
+      input_x = (int8_t)( (int)IncomingBuffer[2]-128 );
+      input_y = (int8_t)( (int)IncomingBuffer[3]-128 );
+      input_z = (int8_t)( (int)IncomingBuffer[4]-128 );
+      input_rx = (int8_t)( (int)IncomingBuffer[5]-128 );
+      input_ry = (int8_t)( (int)IncomingBuffer[6]-128 );
+      input_rz = (int8_t)( (int)IncomingBuffer[7]-128 );
+      input_buttons = (uint8_t)(IncomingBuffer[8]);
+      input_extend1 = (uint8_t)(IncomingBuffer[9]);
+      input_extend2 = (uint8_t)(IncomingBuffer[10]);
       
       LastCommand = millis();
       return 1;
@@ -119,11 +119,11 @@ int ReadPacket(){//Read a packet from CommandSerial
 //ReadCommanderData
 void GetInputs(){
   unsigned long InputTimeout = millis();
-  while((CommandSerial.available()>12)&&((millis()-InputTimeout)<100)){
+  while((COMMAND_SERIAL.available()>12)&&((millis()-InputTimeout)<100)){
     ReadPacket();
     //ReadButtons 
-    AnalogInMode = bitRead(InputButtons, ANALOGMODEBIT);
-    AnalogHold = bitRead(InputButtons, ANALOGHOLDBIT);
+    AnalogInMode = bitRead(input_buttons, ANALOGMODEBIT);
+    AnalogHold = bitRead(input_buttons, ANALOGHOLDBIT);
     //insert other buttons here
 
 
@@ -131,46 +131,46 @@ void GetInputs(){
 
     //apply holds
     if (AnalogHold == 0){
-      GaitStepHeight = -128;
-      GaitMoveY = 0;
-      GaitMoveX = 0;
-      GaitMoveZrot = 0;
-      CamPan = 0;
-      CamTilt = 0;
-      GaitBodyY = 0;
-      GaitBodyX = 0;
-      GaitBodyYaw = 0;
-      GaitBodyPitch = 0;
-      GaitBodyRoll = 0;
-      GaitBodyZ = 0;
+      gait_step_height = -128;
+      gait_move_y = 0;
+      gait_move_x = 0;
+      gait_move_z_rot = 0;
+      cam_pan = 0;
+      cam_tilt = 0;
+      gait_body_y = 0;
+      gait_body_x = 0;
+      gait_body_yaw = 0;
+      gait_body_pitch = 0;
+      gait_body_roll = 0;
+      gait_body_z = 0;
     }
     //Check Mode (body or move)
     if (AnalogInMode == 0){//MoveMode
-      GaitMoveY = MOVELR;
-      GaitMoveX = MOVEFB;
-      GaitMoveZrot = MOVEYAW;
-      GaitStepHeight = MOVEUD;
-      //CamPan = map(Ext1,-7,7,-127,127);
-      //CamTilt = map(Ext2,-7,7,-127,127);
+      gait_move_y = MOVELR;
+      gait_move_x = MOVEFB;
+      gait_move_z_rot = MOVEYAW;
+      gait_step_height = MOVEUD;
+      //cam_pan = map(Ext1,-7,7,-127,127);
+      //cam_tilt = map(Ext2,-7,7,-127,127);
     }
     else if (AnalogInMode == 1){//BodyMode
-      GaitBodyY = BODYLR;
-      GaitBodyX = BODYFB;
-      GaitBodyYaw = BODYYAW;
-      GaitBodyPitch = BODYPITCH;
-      GaitBodyZ = BODYUD;
-      GaitBodyRoll = BODYROLL;
+      gait_body_y = BODYLR;
+      gait_body_x = BODYFB;
+      gait_body_yaw = BODYYAW;
+      gait_body_pitch = BODYPITCH;
+      gait_body_z = BODYUD;
+      gait_body_roll = BODYROLL;
     }
     
-    if (bitRead(InputButtons, ButtonRight1)){
-      MoveMode = MOVE_MODE_WALK_PERIODIC;
+    if (bitRead(input_buttons, ButtonRight1)){
+      move_mode = MOVE_MODE_WALK_PERIODIC;
     }
-    else if (bitRead(InputButtons, ButtonRight2)){
-      MoveMode = MOVE_MODE_CRAWL_PERIODIC;
+    else if (bitRead(input_buttons, ButtonRight2)){
+      move_mode = MOVE_MODE_CRAWL_PERIODIC;
     }
     
     
-    switch ((InputExtend1 >> 4) & 0x0f) {
+    switch ((input_extend1 >> 4) & 0x0f) {
     case 0://Reset Exended byte values
       ExtMode0Reset();
       break;
@@ -183,7 +183,7 @@ void GetInputs(){
     case 4://Leg Place Mode
       break;
     case 5://Gait Mode
-      ExtMode5GaitMode(InputExtend1 & 0x0f);
+      ExtMode5GaitMode(input_extend1 & 0x0f);
       break;
     case 6:
       break;
@@ -206,22 +206,22 @@ void GetInputs(){
 }
 
 void ExtMode0Reset(){
-  MoveMode = MOVE_MODE_WALK_PERIODIC;
+  move_mode = MOVE_MODE_WALK_PERIODIC;
 }
 
 void ExtMode5GaitMode(uint8_t InputGaitMode){
   switch (InputGaitMode) {
   case 0://Default Gait
-    MoveMode = MOVE_MODE_WALK_PERIODIC;
+    move_mode = MOVE_MODE_WALK_PERIODIC;
     break;
   case 1://Crawl Gait
-    MoveMode = MOVE_MODE_CRAWL_PERIODIC;
+    move_mode = MOVE_MODE_CRAWL_PERIODIC;
     break;
   case 2://Swerve Mode
-    MoveMode = MOVE_MODE_SWERVE;
+    move_mode = MOVE_MODE_SWERVE;
     break;
   case 3://Rule Gait
-    MoveMode = MOVE_MODE_WALK_RULE;
+    move_mode = MOVE_MODE_WALK_RULE;
     break;
   }
 }

@@ -14,13 +14,13 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth, int Wheel
   
   //calcualte the leg positions and output them
   int LegPos[NUM_LEGS][3] = {
-                {-WheelWidth/2,WheelLength/2,InitialPositions[0][2]},
-                {WheelWidth/2,WheelLength/2,InitialPositions[1][2]},
-                {WheelWidth/2,-WheelLength/2,InitialPositions[2][2]},
-                {-WheelWidth/2,-WheelLength/2,InitialPositions[3][2]}};
+                {-WheelWidth/2,WheelLength/2,kInitialPositions[0][2]},
+                {WheelWidth/2,WheelLength/2,kInitialPositions[1][2]},
+                {WheelWidth/2,-WheelLength/2,kInitialPositions[2][2]},
+                {-WheelWidth/2,-WheelLength/2,kInitialPositions[3][2]}};
   for(int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < 3; j++){
-      GaitGenOut[i][j] = LegPos[i][j];
+      gait_gen_out[i][j] = LegPos[i][j];
     }
   }
   
@@ -73,8 +73,8 @@ void SwerveSteer(float Xmove, float Ymove, float Zrot, int WheelWidth, int Wheel
   
   //Set the spherical part
   for(int i = 0; i < 3; i++){
-    LegGlobalSpherical[i][0] = LegWheelSpherical1[1][0];
-    LegGlobalSpherical[i][1] = LegWheelSpherical1[1][1];
-    LegGlobalSpherical[i][2] += LegWheelSpherical1[1][2]*WheelVelocity;
+    leg_global_spherical[i][0] = LegWheelSpherical1[1][0];
+    leg_global_spherical[i][1] = LegWheelSpherical1[1][1];
+    leg_global_spherical[i][2] += LegWheelSpherical1[1][2]*WheelVelocity;
   }
 }

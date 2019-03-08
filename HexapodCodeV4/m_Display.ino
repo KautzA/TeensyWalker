@@ -12,25 +12,25 @@ void MainDisplay(){//Display run in loop
   display.setTextColor(WHITE);
   display.setCursor(0,0);
   display.print("Time = ");
-  display.println((float)Tim1/1000);
+  display.println((float)time_1/1000);
   display.print("X:");
-  display.print(InputX,HEX);
+  display.print(input_x,HEX);
   display.print(",Y:");
-  display.print(InputY,HEX);
+  display.print(input_y,HEX);
   display.print(",Z:");
-  display.println(InputZ,HEX);
+  display.println(input_z,HEX);
   display.print("Rx:");
-  display.print(InputRx,HEX);
+  display.print(input_rx,HEX);
   display.print(",Ry:");
-  display.print(InputRy,HEX);
+  display.print(input_ry,HEX);
   display.print(",Rz:");
-  display.println(InputRz,HEX);
+  display.println(input_rz,HEX);
   display.print("B:");
-  display.print(InputButtons,HEX);
+  display.print(input_buttons,HEX);
   display.print(",E1:");
-  display.print(InputExtend1,HEX);
+  display.print(input_extend1,HEX);
   display.print(",E2:");
-  display.println(InputExtend2,HEX); 
+  display.println(input_extend2,HEX); 
 #endif
 }
 

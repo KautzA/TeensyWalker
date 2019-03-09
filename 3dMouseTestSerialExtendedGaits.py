@@ -80,6 +80,8 @@ time.sleep(.25)
 print("LoopStart");
 while True:
     ser.flushInput #discard anything in the serial buffer
+    #while (ser.inWaiting > 0):
+    #    print ser.read()
     
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -89,11 +91,13 @@ while True:
             sys.exit()
     #get inputs
     AxisX = SpaceMouse.get_axis(0)
-    AxisY = SpaceMouse.get_axis(1)
-    AxisZ = SpaceMouse.get_axis(2)
-    AxisRx = SpaceMouse.get_axis(5)
+    AxisY = -SpaceMouse.get_axis(1)
+    AxisZ = -SpaceMouse.get_axis(2)
+    AxisRx = -SpaceMouse.get_axis(5)
     AxisRy = SpaceMouse.get_axis(4)
-    AxisRz = SpaceMouse.get_axis(3)
+    AxisRz = -SpaceMouse.get_axis(3)
+
+    AxisList = [AxisX, AxisY, AxisZ, AxisRx, AxisRy, AxisRz]
 
     #get keyboard keys
     keydown=pygame.key.get_pressed()
@@ -141,53 +145,41 @@ while True:
     
     
     ser.write(chr(OutByte1))
-    #ser.write('\r\n')
-    print"1Send "
-    print(OutByte1)
+    #print"1Send "
+    #print(OutByte1)
     ser.write(chr(OutByte2))
-    #ser.write('\r\n')
-    print"2Send"
-    print(OutByte2)
+    #print"2Send"
+    #print(OutByte2)
     ser.write(chr(OutByte3))
-    #ser.write('\r\n')
-    print"3Send"
-    print(OutByte3)
+    #print"3Send"
+    #print(OutByte3)
     ser.write(chr(OutByte4))
-    #ser.write('\r\n')
-    print"4Send"
-    print(OutByte4)
+    #print"4Send"
+    #print(OutByte4)
     ser.write(chr(OutByte5))
-    #ser.write('\r\n')
-    print"5Send"
-    print(OutByte5)
+    #print"5Send"
+    #print(OutByte5)
     ser.write(chr(OutByte6))
-    #ser.write('\r\n')
-    print"6Send"
-    print(OutByte6)
+    #print"6Send"
+    #print(OutByte6)
     ser.write(chr(OutByte7))
-    #ser.write('\r\n')
-    print"7Send"
-    print(OutByte7)
+    #print"7Send"
+    #print(OutByte7)
     ser.write(chr(OutByte8))
-    #ser.write('\r\n')
-    print"8Send"
-    print(OutByte8)
+    #print"8Send"
+    #print(OutByte8)
     ser.write(chr(OutByte9))
-    #ser.write('\r\n')
-    print"9Send"
-    print(OutByte9)
+    #print"9Send"
+    #print(OutByte9)
     ser.write(chr(OutByte10))
-    #ser.write('\r\n')
-    print"10Send"
-    print(OutByte10)
+    #print"10Send"
+    #print(OutByte10)
     ser.write(chr(OutByte11))
-    #ser.write('\r\n')
-    print"11Send"
-    print(OutByte11)
+    #print"11Send"
+    #print(OutByte11)
     ser.write(chr(OutByte12))
-    #ser.write('\r\n')
-    print"12Send"
-    print(OutByte12)
+    #print"12Send"
+    #print(OutByte12)
     ser.flush()
     time.sleep(.1)
 
@@ -198,7 +190,7 @@ while True:
     for Axis in range(0,NumAxes):
         print Axis,", ", SpaceMouse.get_axis(Axis)
         AxisDistance = (DisplayWidth)/NumAxes
-        pygame.draw.circle(DisplaySurface,(255,255,255),(int(25+((Axis+.5)*AxisDistance)),DisplayHeight/4 - int(SpaceMouse.get_axis(Axis)*(((DisplayHeight/2)-50)/2))),5,0)
+        pygame.draw.circle(DisplaySurface,(255,255,255),(int(25+((Axis+.5)*AxisDistance)),DisplayHeight/4 - int(AxisList[Axis]*(((DisplayHeight/2)-50)/2))),5,0)
     print""
     
     #add text for Commander Packets

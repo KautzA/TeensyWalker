@@ -25,7 +25,7 @@ int GaitGen2Cycle(int input_array[NUM_LEGS][3],int leg_number, int period, int c
     modifiers[0] = translate_x*generator1;
     modifiers[1] = translate_y*generator1;
     modifiers[2] = translate_z;
-    modifiers[3] = ((float)turn_z * PI / 4.0 *generator1);
+    modifiers[3] = -((float)turn_z * PI / 4.0 *generator1);
   }
   else{//Ground Leg Segment
     float generator1 = ((2.0*(float)num_legs_period/period)*((-generator0/(num_legs_period-1))+(period/(2.0*((float)num_legs_period-1)))));//periodic function that goes from 1 to -1 in NumLegs-1/NumLegs of period
@@ -35,7 +35,7 @@ int GaitGen2Cycle(int input_array[NUM_LEGS][3],int leg_number, int period, int c
     modifiers[0] = translate_x*generator1;
     modifiers[1] = translate_y*generator1;
     modifiers[2] = -translate_z;
-    modifiers[3] = (turn_z * PI / 4 *generator1);
+    modifiers[3] = -(turn_z * PI / 4 *generator1);
   }
 
   int Output1[3];//Translate

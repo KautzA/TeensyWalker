@@ -12,17 +12,17 @@
 //What input is which----------------------------------------
 //Move Mode(for analog)---------------
 #define MOVELR input_x
-#define MOVEFB -input_y
+#define MOVEFB input_y
 #define MOVEYAW input_rz
-#define MOVEUD -input_z
+#define MOVEUD input_z
 //      cam_pan  EXT1 (in = 0) = 0 (in > 0) -= 8
 //      cam_tilt EXT2 (in = 0) = 0 (in > 0) -= 8
 //Body Mode(for analog)----------------
 #define BODYLR input_x
-#define BODYFB -input_y 
-#define BODYUD -input_z
-#define BODYYAW -input_rz
-#define BODYPITCH -input_rx
+#define BODYFB input_y 
+#define BODYUD input_z
+#define BODYYAW input_rz
+#define BODYPITCH input_rx
 #define BODYROLL input_ry
 //      BODYHEIGHT EXT1 (in = 0) = 0 (in > 0) = 8
 //      BODYROLL   EXT2 (in = 0) = 0 (in > 0) = 8

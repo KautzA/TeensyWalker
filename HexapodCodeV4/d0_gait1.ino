@@ -5,7 +5,7 @@ void GaitGen1(int period, int cycle, int translate_x, int translate_y, int trans
   translate_x =map(translate_x,-127,127,-40,40);
   translate_y =map(translate_y,-127,127,-40,40);
   translate_z =map(translate_z,-127,127,0,20);
-  turn_z  =-map(turn_z,-127,127,-50,50)/100;
+  turn_z  =-map(turn_z,-127,127,50,-50)/100;
 
   float generator1 = ((4.0 *(abs((cycle%period)-(period/2))-(period/4)))/period);
   int generator_z = (-1*((abs((cycle%period)-(period/2)))/((cycle%period)-(period/2))));

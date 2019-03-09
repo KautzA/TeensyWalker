@@ -14,23 +14,23 @@ void MainDisplay(){//Display run in loop
   display.print("Time = ");
   display.println((float)time_1/1000);
   display.print("X:");
-  display.print(input_x,HEX);
+  display.print(input_x+128,HEX);
   display.print(",Y:");
-  display.print(input_y,HEX);
+  display.print(input_y+128,HEX);
   display.print(",Z:");
-  display.println(input_z,HEX);
+  display.println(input_z+128,HEX);
   display.print("Rx:");
-  display.print(input_rx,HEX);
+  display.print(input_rx+128,HEX);
   display.print(",Ry:");
-  display.print(input_ry,HEX);
+  display.print(input_ry+128,HEX);
   display.print(",Rz:");
-  display.println(input_rz,HEX);
+  display.println(input_rz+128,HEX);
   display.print("B:");
-  display.print(input_buttons,HEX);
+  display.print(input_buttons+128,HEX);
   display.print(",E1:");
-  display.print(input_extend1,HEX);
+  display.print(input_extend1+128,HEX);
   display.print(",E2:");
-  display.println(input_extend2,HEX); 
+  display.println(input_extend2+128,HEX); 
 #endif
 }
 

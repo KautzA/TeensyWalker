@@ -8,15 +8,19 @@
  X Axis is to the right
  Z Axis is to the top
  
- +Y
- ^    Front
- |
- |   0  ^  1
- |   \\| |//
- | 4===| |===5
- |   //| |\\
- |   3  v  2
- o---------->+X
+    +Y
+    ^    Front
+    |
+    |   0  ^  1
+    |   \\| |//
+    | 4===| |===5
+    |   //| |\\
+    |   3  v  2
+    o---------->+X Right
+   /
+  /
+ +z
+ Top
  
  Leg
  

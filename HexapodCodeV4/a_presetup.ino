@@ -222,7 +222,7 @@ const int kInitialPositions [NUM_LEGS] [3] = {//x,y,z
 #define TARSUS_LENGTH 25
 
 //Dimensions used to convert to local leg coords
-#define COG_X 52 // distance that the legs are in left and right of the COG
+#define COG_X 52 // distance that the legs are in left and right of the COG (center of gravity)
 #define COG_Y 65 // distance that the legs are in front and behind the COG
 
 //Variable used to output from functions

@@ -2,35 +2,42 @@
 /* provide control for Display
  Requires changing Adafruit_SSD1306.cpp to change from wire.h to i2c_t3.h and commenting out compiler sections starting with "#ifndef __SAM3X8E__"
  
- display will show 21 characters per line at size 1
+ display will show 21 characters per line at size 1 with 4 lines
  */
 
 void MainDisplay(){//Display run in loop
 #if defined(OLED_ENABLE)
+  //Time=xxxxxxxxxxxxxxxx
+  //X00Y00Z00,R:X00Y00Z00
+  //B:00,E:00,00,V:000,
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
   display.setCursor(0,0);
   display.print("Time = ");
   display.println((float)time_1/1000);
-  display.print("X:");
+  
+  display.print("X");
   display.print(input_x+128,HEX);
-  display.print(",Y:");
+  display.print("Y");
   display.print(input_y+128,HEX);
-  display.print(",Z:");
-  display.println(input_z+128,HEX);
-  display.print("Rx:");
+  display.print("Z");
+  display.print(input_z+128,HEX);
+  display.print("R:X");
   display.print(input_rx+128,HEX);
-  display.print(",Ry:");
+  display.print("Y");
   display.print(input_ry+128,HEX);
-  display.print(",Rz:");
+  display.print("Z");
   display.println(input_rz+128,HEX);
+  
   display.print("B:");
   display.print(input_buttons+128,HEX);
-  display.print(",E1:");
+  display.print(",E:");
   display.print(input_extend1+128,HEX);
-  display.print(",E2:");
-  display.println(input_extend2+128,HEX); 
+  display.print(",");
+  display.print(input_extend2+128,HEX);
+  display.print(",V:");
+  display.println(current_voltage,DEC);
 #endif
 }
 

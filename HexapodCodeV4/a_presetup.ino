@@ -226,6 +226,8 @@ const int kInitialPositions [NUM_LEGS] [3] = {//x,y,z
 #define COG_Y 65 // distance that the legs are in front and behind the COG
 
 //Variable used to output from functions
+uint8_t current_voltage = 0; //battery voltage in tenths
+unsigned long last_voltage_read = 0;
 unsigned long time_1;
 int gait_gen_out[NUM_LEGS][3]; // For GaitGen [leg] [x,y,z]
 int body_mod_out[NUM_LEGS][3]; // for BodyMod [leg] [x,y,z]

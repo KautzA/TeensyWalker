@@ -10,6 +10,7 @@ void MainDisplay(){//Display run in loop
   //Time=xxxxxxxxxxxxxxxx
   //X00Y00Z00,R:X00Y00Z00
   //B:00,E:00,00,V:000,
+  //T:000
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
@@ -38,6 +39,9 @@ void MainDisplay(){//Display run in loop
   display.print(input_extend2+128,HEX);
   display.print(",V:");
   display.println(current_voltage,DEC);
+  
+  display.print("T:");
+  display.print(last_cycle_time,DEC);
 #endif
 }
 

@@ -71,12 +71,9 @@ void loop() {
 #endif
 
   //Blink the running LED
-  if(time_1%500<150){
-    digitalWrite(LED_RUNNING,HIGH);
-  }
-  else{
-    digitalWrite(LED_RUNNING,LOW);
-  }
+  uint8_t led_state= abs((time_1%510)-255);
+  analogWrite(LED_RUNNING,led_state);
+  analogWrite(LED_RGB_BLU,led_state);
   
   //Handle error LED patterns
   if(error_state & B00000001){//DXL Error

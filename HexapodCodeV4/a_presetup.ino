@@ -52,6 +52,8 @@
 #define LED_RGB_RED 23 //red LED on indicator button
 #define LED_RGB_GRE 22 //green LED on indicator button
 #define LED_RGB_BLU 21 //blue LED on indicator button
+#define BUTTON_RGB_PIN 20 //the button on the indicator button
+#define BUTTON_RGB_MODE INPUT_PULLUP //pinmode for the indicator button pin
 
 #define ServoI2C Wire1
 

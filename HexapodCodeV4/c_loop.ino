@@ -77,6 +77,7 @@ void loop() {
   else{
     digitalWrite(LED_RUNNING,LOW);
   }
+  
   //Handle error LED patterns
   if(error_state & B00000001){//DXL Error
     if(time_1%500<150){
@@ -95,6 +96,7 @@ void loop() {
     }
   }
 
+  //Fade the Status LED
   delay(50);
 
 }

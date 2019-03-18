@@ -21,6 +21,7 @@ void setup(){
 #endif
 
   //Set pinmode for LED pins
+  pinMode(BUTTON_RGB_PIN,BUTTON_RGB_MODE);
   pinMode(LED_RUNNING,OUTPUT);
   pinMode(LED_ERROR,OUTPUT);
   pinMode(LED_RGB_RED,OUTPUT);

@@ -43,8 +43,8 @@
 
 
 //Error LED
-#define LED_RUNNING 24 //red led by Xbee
-#define LED_ERROR 12 //yellow led by Xbee
+#define LED_RUNNING 12 //red led by Xbee
+#define LED_ERROR 24 //yellow led by Xbee
 
 //UI LEDs
 #define LED_RGB_ON HIGH //On state for LEDs
@@ -54,6 +54,7 @@
 #define LED_RGB_BLU 21 //blue LED on indicator button
 #define BUTTON_RGB_PIN 20 //the button on the indicator button
 #define BUTTON_RGB_MODE INPUT_PULLUP //pinmode for the indicator button pin
+
 
 #define ServoI2C Wire1
 
@@ -226,6 +227,9 @@ const int kInitialPositions [NUM_LEGS] [3] = {//x,y,z
 //Dimensions used to convert to local leg coords
 #define COG_X 52 // distance that the legs are in left and right of the COG (center of gravity)
 #define COG_Y 65 // distance that the legs are in front and behind the COG
+
+//Period of the status LED
+unsigned int led_running_period = 2000;
 
 //Variable used to output from functions
 uint8_t current_voltage = 0; //battery voltage in tenths

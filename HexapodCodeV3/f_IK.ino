@@ -1,3 +1,4 @@
+//ik
 //Translate global coordinates to local coordinates
 void LegCoords(){
   int Output3[NUM_LEGS][3];
@@ -51,14 +52,14 @@ void LegCalculate(){
     Output4[i][0] = -(atanf(Ypos/Xpos));
     //Output4[i][0] = -(atan2(-Ypos,Xpos));
     ;//Coxa
-    Output4[i][1] = (atan2f(Zpos,LegRadius) + acos(((FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos))-(TibiaLength*TibiaLength))/(-2*sqrt((LegRadius*LegRadius)+(Zpos*Zpos))*TibiaLength)));//Femur
-    Output4[i][2] = -(acosf(((TibiaLength*TibiaLength)+(FemurLength*FemurLength)-((LegRadius*LegRadius)+(Zpos*Zpos)))/(-2*FemurLength*TibiaLength)));//Tibia
+    Output4[i][1] = (atan2f(Zpos,LegRadius) + acos(((FEMUR_LENGTH*FEMUR_LENGTH)-((LegRadius*LegRadius)+(Zpos*Zpos))-(TIBIA_LENGTH*TIBIA_LENGTH))/(-2*sqrt((LegRadius*LegRadius)+(Zpos*Zpos))*TIBIA_LENGTH)));//Femur
+    Output4[i][2] = -(acosf(((TIBIA_LENGTH*TIBIA_LENGTH)+(FEMUR_LENGTH*FEMUR_LENGTH)-((LegRadius*LegRadius)+(Zpos*Zpos)))/(-2*FEMUR_LENGTH*TIBIA_LENGTH)));//Tibia
     Output4[i][3] = (0);
-    Output4[i][4] = (1.5707 + Output4[i][2] + Output4[i][1]);//Tharsus
+    Output4[i][4] = (HALF_PI + Output4[i][2] + Output4[i][1]);//Tharsus
   }
   for (int i = 0; i < NUM_LEGS; i++){
     for(int j = 0; j < NUM_SERVOS_PER_LEG; j++){
-      LegCalculateOut[i][j] = Output4[i][j];
+      LegDynamixels[i][j] = Output4[i][j];
     }
   }
 }

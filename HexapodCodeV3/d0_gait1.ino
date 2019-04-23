@@ -1,3 +1,4 @@
+//gait1
 //This code covers the basic Gait Generator
 void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float ZTurn){
     //Sale the inputs
@@ -9,7 +10,7 @@ void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   float Generator1 = ((4.0 *(abs((Cycle%Period)-(Period/2))-(Period/4)))/Period);
   float Generator2 = Generator1;
   int GeneratorZ = (-1*((abs((Cycle%Period)-(Period/2)))/((Cycle%Period)-(Period/2))));
-  float Theta1 = (ZTurn * 3.14 / 4 *Generator1);
+  float Theta1 = (ZTurn * PI / 4 *Generator1);
   
   //Type1 and Type two are added to legs to produce movement
   float Type1[3] = {
@@ -21,28 +22,28 @@ void GaitGen1(int Period, int Cycle, int Xtrans, int Ytrans, int Ztrans, float Z
   //First pass does gait generation for translation
   int Output1[NUM_LEGS][3] = {
     { //Leg 0
-      (Leg0InitX + Type1[0]),//X (Output[0][0])
-      (Leg0InitY + Type1[1]),//Y (Output[0][1])
-      (Leg0InitZ + Type1[2]) //Z (Output[0][2])
+      (InitialPositions[0][0] + Type1[0]),//X (Output[0][0])
+      (InitialPositions[0][1] + Type1[1]),//Y (Output[0][1])
+      (InitialPositions[0][2] + Type1[2]) //Z (Output[0][2])
 
       }
       ,
     { //Leg 1
-      (Leg1InitX + Type2[0]),//X
-      (Leg1InitY + Type2[1]),//Y
-      (Leg1InitZ + Type2[2]) //Z
+      (InitialPositions[1][0] + Type2[0]),//X
+      (InitialPositions[1][1] + Type2[1]),//Y
+      (InitialPositions[1][2] + Type2[2]) //Z
       }
       ,
     { //Leg 2
-      (Leg2InitX + Type1[0]),//X
-      (Leg2InitY + Type1[1]),//Y
-      (Leg2InitZ + Type1[2]) //Z
+      (InitialPositions[2][0] + Type1[0]),//X
+      (InitialPositions[2][1] + Type1[1]),//Y
+      (InitialPositions[2][2] + Type1[2]) //Z
       }
       ,
     { //Leg 3
-      (Leg3InitX + Type2[0]),//X
-      (Leg3InitY + Type2[1]),//Y
-      (Leg3InitZ + Type2[2]) //Z
+      (InitialPositions[3][0] + Type2[0]),//X
+      (InitialPositions[3][1] + Type2[1]),//Y
+      (InitialPositions[3][2] + Type2[2]) //Z
       }
       ,
     };

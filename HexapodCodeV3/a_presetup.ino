@@ -1,3 +1,4 @@
+//presetup
 //Enable return data for userSerial
 #define UserSerialTransmit
 
@@ -139,54 +140,54 @@ BioloidControllerEx bioloid = BioloidControllerEx();
 const int DXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
   {
     {
-      538,759,2        }
+      538,759,2            }
     ,{
-      183,813,3        }
+      183,813,3            }
     ,{
-      39,941,4        }
+      39,941,4            }
     ,{
-      205,820,5        }
+      205,820,5            }
     ,{
-      205,820,6        }
+      205,820,6            }
   }
   ,
   {
     {
-      280,469,7        }
+      280,469,7            }
     ,{
-      193,809,8        }
+      193,809,8            }
     ,{
-      56,930,9        }
+      56,930,9            }
     ,{
-      211,814,10        }
+      211,814,10            }
     ,{
-      211,814,11        }
+      211,814,11            }
   }
   ,
   {
     {
-      543,756,12        }
+      543,756,12            }
     ,{
-      186,814,13        }
+      186,814,13            }
     ,{
-      44,926,14        }
+      44,926,14            }
     ,{
-      188,817,15        }
+      188,817,15            }
     ,{
-      188,817,16        }
+      188,817,16            }
   }
   ,
   {
     {
-      262,468,17        }
+      262,468,17            }
     ,{
-      182,824,18        }
+      182,824,18            }
     ,{
-      69,941,19        }
+      69,941,19            }
     ,{
-      208,812,20        }
+      208,812,20            }
     ,{
-      211,814,21        }
+      211,814,21            }
   }
 };
 
@@ -196,22 +197,22 @@ const int DXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {
 #define NUM_PWM_SERVOS 6
 const int PWMServoLimits[NUM_PWM_SERVOS][3] = {//order min,max,id
   {
-    0,180,0    }
+    0,180,0      }
   ,
   {
-    0,180,1    }
+    0,180,1      }
   ,
   {
-    0,180,2    }
+    0,180,2      }
   ,
   {
-    0,180,3    }
+    0,180,3      }
   ,
   {
-    0,180,4    }
+    0,180,4      }
   ,
   {
-    0,180,5    }
+    0,180,5      }
 };
 
 float LegDynamixels[NUM_LEGS][NUM_SERVOS_PER_LEG]{
@@ -238,11 +239,26 @@ float PWMServoPos[NUM_PWM_SERVOS]={
 #define Leg3InitY -120
 #define Leg3InitZ -100
 
+const int InitialPositions [NUM_LEGS] [3] = {//x,y,z
+  {
+    -120,  120, -100  }
+  ,//Leg0
+  { 
+    120,  120, -100  }
+  ,//Leg1
+  { 
+    120, -120, -100  }
+  ,//Leg2
+  {
+    -120, -120, -100  } 
+};//Leg3
+
+
 //Dimensions used in leg calculations
-#define CoxaLength 50
-#define FemurLength 93
-#define TibiaLength 97
-#define TharsusLength 25
+#define COXA_LENGTH 50
+#define FEMUR_LENGTH 93
+#define TIBIA_LENGTH 97
+#define TARSUS_LENGTH 25
 
 //Dimensions used to convert to local leg coords
 #define CogX 52 // distance that the legs are in left and right of the COG
@@ -250,9 +266,13 @@ float PWMServoPos[NUM_PWM_SERVOS]={
 
 //Variable used to output from functions
 unsigned long Tim1;
-int GaitGenOut[NUM_LEGS][3]; // For GaitGen
-int BodyModOut[NUM_LEGS][3]; // for BodyMod
-int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut
-float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut
+int GaitGenOut[NUM_LEGS][3]; // For GaitGen [leg] [x,y,z]
+int BodyModOut[NUM_LEGS][3]; // for BodyMod [leg] [x,y,z]
+int LegCoordsOut[NUM_LEGS][3];// For LegCoordsOut, [leg] [x,y,z]
+//float LegCalculateOut[NUM_LEGS][NUM_SERVOS_PER_LEG];// For LegCalculateOut, [leg] [servo] //not used
+float LegGlobalSpherical[NUM_LEGS][3]; //For GaitGen/SwerveSteer, [leg] [Azimuth, Elevation, Bank]
+float LegLocalSpherical[NUM_LEGS][3];  //For LocalSpherical, [leg] [Azimuth, Elevation, Bank]
+
+
 
 

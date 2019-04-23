@@ -21,7 +21,7 @@
 
 void PWMServoMap(){
   for(int i = 0; i < NUM_PWM_SERVOS; i++){
-    PWMI2C_setPWM(PWMServoLimits[i][3],0,constrain(map(constrain(PWMServoPos[i],PWMServoLimits[i][0],PWMServoLimits[i][1]),0,180,PWM_SERVOS_MIN,PWM_SERVOS_MAX),PWM_SERVOS_MIN,PWM_SERVOS_MAX));
+    PWMI2C_setPWM(kPWMServoLimits[i][3],0,constrain(map(constrain(pwm_servo_pos[i],kPWMServoLimits[i][0],kPWMServoLimits[i][1]),0,180,PWM_SERVOS_MIN,PWM_SERVOS_MAX),PWM_SERVOS_MIN,PWM_SERVOS_MAX));
   } 
 }
 

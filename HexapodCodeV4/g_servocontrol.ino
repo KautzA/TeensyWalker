@@ -42,13 +42,36 @@ int ServoPosQuerry(int servo_id){
 
 //-----------------------------------------------------------------
 //Write to Servos
-void ServoWrite(int servo_id, int target_position){
-  SetPosition(servo_id,target_position);
-  /*USER_SERIAL.print(ServoID);
-   USER_SERIAL.print(",");
-   USER_SERIAL.println(Position);
-   */
-  //Code Here
+void ServoWrite(byte ServoID, unsigned int Pos){
+  byte Header = 170; //Header that opens the command and allows autobaudrate to be set
+  byte Device = 12; //Identifier for the maestro in case of chaining Default 12
+  byte TruncatedCommand = 04;//0x04 represents the command to set servo position
+  byte Servoplace = constrain(ServoID,0,999);//127);//the location of the servo on the controller
+  byte Data1 = 0;//This holds the lower 7 bits of the position
+  byte Data2 = 0;//This holds the upper 7 bits of the position
+  unsigned long ScalePos = Pos*4;
+  USER_SERIAL.println(ScalePos);
+  for (int i = 0; i < 7; i++){
+    bitWrite(Data1,i,bitRead(ScalePos,i));
+  }
+  for (int i = 0; i < 7; i++){
+    bitWrite(Data2,i,bitRead(ScalePos,(i+7)));
+  }
+  //Write the packet
+  USER_SERIAL.println(Header);
+  USER_SERIAL.println(Device);
+  USER_SERIAL.println(TruncatedCommand);
+  USER_SERIAL.println(Servoplace);
+  USER_SERIAL.println(Data1);
+  USER_SERIAL.println(Data2);
+  
+  
+  MAESTRO_SERIAL.write(Header);
+  MAESTRO_SERIAL.write(Device);
+  MAESTRO_SERIAL.write(TruncatedCommand);
+  MAESTRO_SERIAL.write(Servoplace);
+  MAESTRO_SERIAL.write(Data1);
+  MAESTRO_SERIAL.write(Data2);
 }
 
 

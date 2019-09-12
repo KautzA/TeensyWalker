@@ -13,6 +13,7 @@
 #define DXL_SERIAL Serial1
 #define USB_SERIAL Serial
 #define COMMAND_SERIAL Serial2
+#define MAESTRO_SERIAL Serial4
 
 
 #if defined(__AVR__)
@@ -58,8 +59,8 @@
 
 #define ServoI2C Wire1
 
-#define NUM_LEGS 4
-#define NUM_SERVOS_PER_LEG 5
+#define NUM_LEGS 6
+#define NUM_SERVOS_PER_LEG 3
 
 //Move Mode --------------------------------------
 #define MOVE_MODE_WALK_PERIODIC 0
@@ -144,32 +145,34 @@ BioloidControllerEx bioloid = BioloidControllerEx();
 //ServoLimits
 const int kDXLServoLimits[NUM_LEGS][NUM_SERVOS_PER_LEG][3] = {//min,max,ID
   {//Leg0
-    {538,759,2}, //Leg0 Coxa
-    {183,813,3}, //Leg0 Femur
-    {39,941,4},  //Leg0 Tibia
-    {205,820,5}, //Leg0 TibiaRotate
-    {205,820,6}  //Leg0 Tarsus
+    {1000,2000,0}, //Leg0 Coxa
+    {1000,2000,1}, //Leg0 Femur
+    {1000,2000,2},  //Leg0 Tibia
   },
   {//Leg1
-    {280,469,7}, //Leg1 Coxa
-    {193,809,8}, //Leg1 Femur
-    {56,930,9},  //Leg1 Tibia
-    {211,814,10},//Leg1 TibiaRotate
-    {211,814,11} //Leg1 Tarsus
+    {1000,2000,3}, //Leg1 Coxa
+    {1000,2000,4}, //Leg1 Femur
+    {1000,2000,5},  //Leg1 Tibia
   },
   {//Leg2
-    {543,756,12},//Leg2 Coxa
-    {186,814,13},//Leg2 Femur
-    {44,926,14}, //Leg2 Tibia
-    {188,817,15},//Leg2 TibiaRotate
-    {188,817,16} //Leg2 Tarsus
+    {1000,2000,6},//Leg2 Coxa
+    {1000,2000,7},//Leg2 Femur
+    {1000,2000,8}, //Leg2 Tibia
   },
   {//Leg3
-    {262,468,17},//Leg3 Coxa
-    {182,824,18},//Leg3 Femur
-    {69,941,19}, //Leg3 Tibia
-    {208,812,20},//Leg3 TibiaRotate
-    {211,814,21} //Leg3 Tarsus
+    {1000,2000,9},//Leg3 Coxa
+    {1000,2000,10},//Leg3 Femur
+    {1000,2000,11}, //Leg3 Tibia
+  },
+  {//Leg4
+    {1000,2000,12},//Leg4 Coxa
+    {1000,2000,13},//Leg4 Femur
+    {1000,2000,14}, //Leg4 Tibia
+  },
+  {//Leg5
+    {1000,2000,15},//Leg5 Coxa
+    {1000,2000,16},//Leg5 Femur
+    {1000,2000,17}, //Leg5 Tibia
   }
 };
 
@@ -209,25 +212,37 @@ float pwm_servo_pos[NUM_PWM_SERVOS]={
 #define LEG3_INIT_X -120
 #define LEG3_INIT_Y -120
 #define LEG3_INIT_Z -100
+//Leg4 (back right)
+#define LEG4_INIT_X 0
+#define LEG4_INIT_Y -120
+#define LEG4_INIT_Z -100
+//Leg5 (back left
+#define LEG5_INIT_X 0
+#define LEG5_INIT_Y -120
+#define LEG5_INIT_Z -100
 
 const int kInitialPositions [NUM_LEGS] [3] = {//x,y,z
   {LEG0_INIT_X, LEG0_INIT_Y, LEG0_INIT_Z},//Leg0
   {LEG1_INIT_X, LEG1_INIT_Y, LEG1_INIT_Z},//Leg1
   {LEG2_INIT_X, LEG2_INIT_Y, LEG2_INIT_Z},//Leg2
-  {LEG3_INIT_X, LEG3_INIT_Y, LEG3_INIT_Z} //Leg3
+  {LEG3_INIT_X, LEG3_INIT_Y, LEG3_INIT_Z},//Leg3
+  {LEG4_INIT_X, LEG4_INIT_Y, LEG4_INIT_Z},//Leg4
+  {LEG5_INIT_X, LEG5_INIT_Y, LEG5_INIT_Z} //Leg5
 };
 
 
 //Dimensions used in leg calculations
-#define COXA_LENGTH 50
-#define FEMUR_LENGTH 93
-#define TIBIA_LENGTH 97
+#define COXA_LENGTH 10
+#define FEMUR_LENGTH 80
+#define TIBIA_LENGTH 142
 #define TARSUS_LENGTH 25
 
-//Dimensions used to convert to local leg coords
-#define COG_X 52 // distance that the legs are in left and right of the COG (center of gravity)
-#define COG_Y 65 // distance that the legs are in front and behind the COG
 
+//Dimensions used to convert to local leg coords
+//radius is 110mm
+#define COG_X 55 // distance that the legs are in left and right of the COG (center of gravity)
+#define COG_Y 95 // distance that the legs are in front and behind the COG
+#define COG_CENT 110 //distance the middle legs are from the COG in the x axis
 //Period of the status LED
 unsigned int led_running_period = 2000;
 

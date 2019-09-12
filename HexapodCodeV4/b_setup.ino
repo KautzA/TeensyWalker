@@ -36,6 +36,7 @@ void setup(){
   GaitGenControlReset();
 
   //Verify All servos are in place
+  /*
   for (int i = 0; i < NUM_LEGS; i++){
     for (int j = 0; j < NUM_SERVOS_PER_LEG; j++){
       if (ServoPosQuerry(kDXLServoLimits[i][j][2])== -1){
@@ -56,11 +57,13 @@ void setup(){
       }
     }
   }
+  */
 
-
+  /*
   //Test if servo has reset to ID 1
   if (ServoPosQuerry(1)!= -1){
     USER_SERIAL.println("Servo 1 Detected, Error?");
   }
+  */
 }
 

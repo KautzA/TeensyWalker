@@ -3,12 +3,12 @@ void loop() {
   time_1 = millis();
   last_cycle_time = time_1 - last_cycle_start;
   last_cycle_start = time_1;
-  
+  /*
   if ((time_1 - last_voltage_read) > 500){ //read the voltage of servo two every half second
     current_voltage = ax12GetRegister(2,AX_PRESENT_VOLTAGE,1);
     last_voltage_read = time_1;
   }
-  
+  */
 
   //Display the time on the display
   MainDisplay();

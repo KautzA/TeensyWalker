@@ -18,6 +18,14 @@ void LegCoords(){
   output_3[3][0] = -(body_mod_out[3][0] + COG_X);
   output_3[3][1] = -(body_mod_out[3][1] + COG_Y);
   output_3[3][2] = body_mod_out[3][2];
+  
+  output_3[4][0] = (body_mod_out[4][1] - COG_CENT);
+  output_3[4][1] = -(body_mod_out[4][0]);
+  output_3[4][2] = body_mod_out[4][2];
+
+  output_3[5][0] = (body_mod_out[5][0] + COG_CENT);
+  output_3[5][1] = -(body_mod_out[5][1]);
+  output_3[5][2] = body_mod_out[5][2];
 
 
   //Return Output3 to LegCoordsOut

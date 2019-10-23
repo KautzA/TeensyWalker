@@ -4,7 +4,7 @@ void DXLServoMap(){
   for (int i = 0; i < NUM_LEGS; i++){//Iterate through the legs
     for (int j = 0; j < NUM_SERVOS_PER_LEG; j++){//Iterate through the servos on each leg
       int degree_angle = leg_dynamixels[i][j] * (180.0/PI);
-      int servo_pos = map(degree_angle, -150, 150, 0, 1024);
+      int servo_pos = map(degree_angle, -90, 90, 1000, 2000);
       if ((servo_pos > kDXLServoLimits[i][j][0])&&(servo_pos < kDXLServoLimits[i][j][1])){// Servo is within limits
         ServoWrite(kDXLServoLimits[i][j][2],servo_pos);
         #if defined(USER_SERIAL_TRANSMIT)
